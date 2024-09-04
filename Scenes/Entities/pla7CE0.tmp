@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://cebw5sb776kfa"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/player.gd" id="1_dwib3"]
+[ext_resource type="PackedScene" uid="uid://b8oa8ah2t18qu" path="res://Scenes/Components/health.tscn" id="2_u7ibn"]
+[ext_resource type="PackedScene" uid="uid://bxj0bqohqh26q" path="res://Scenes/Components/neon_sprite.tscn" id="3_6w4gn"]
+[ext_resource type="Texture2D" uid="uid://d0pvohn4er6l0" path="res://Textures/Entity/Player/Cube_1.png" id="4_qtir8"]
+[ext_resource type="Texture2D" uid="uid://b3gxsnr1vswt3" path="res://Textures/Entity/Player/Cube_1__Blur_5.png" id="5_8h1vi"]
+[ext_resource type="PackedScene" uid="uid://ed1aikfvg2ij" path="res://Scenes/Components/hurtbox.tscn" id="6_ko7xh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjct8"]
+radius = 32.0624
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_health")]
+collision_mask = 0
+script = ExtResource("1_dwib3")
+movement_speed = 350
+_sprite = NodePath("NeonSprite")
+_health = NodePath("Health")
+
+[node name="Health" parent="." instance=ExtResource("2_u7ibn")]
+
+[node name="NeonSprite" parent="." instance=ExtResource("3_6w4gn")]
+base_texture = ExtResource("4_qtir8")
+glow_texture = ExtResource("5_8h1vi")
+
+[node name="Hurtbox" parent="." instance=ExtResource("6_ko7xh")]
+shape = SubResource("CircleShape2D_jjct8")

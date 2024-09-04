@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxj0bqohqh26q"]
+
+[ext_resource type="Script" path="res://Scripts/Components/neon_sprite.gd" id="1_tnt81"]
+[ext_resource type="Material" uid="uid://nn7mrovsf5fm" path="res://Materials/Components/neon_sprite.tres" id="2_25kt2"]
+
+[sub_resource type="Curve" id="Curve_r28k8"]
+min_value = 1.0
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, -3.1405, 0, 0, Vector2(0.997625, 1.0179), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_glow_sprite")]
+script = ExtResource("1_tnt81")
+_base_sprite = NodePath("BaseSprite")
+_glow_sprite = NodePath("GlowSprite")
+_damage_flash_curve = SubResource("Curve_r28k8")
+_damage_flash_duration = 0.4
+
+[node name="GlowSprite" type="Sprite2D" parent="."]
+material = ExtResource("2_25kt2")
+scale = Vector2(0.75, 0.75)
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)

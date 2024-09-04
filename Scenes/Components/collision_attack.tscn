@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckmg2ptd1cqyt"]
+
+[ext_resource type="Script" path="res://Scripts/Components/collision_attack.gd" id="1_nk7ve"]
+
+[node name="CollisionAttack" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_nk7ve")
+damage = 1
+knockback_distance = 100
+knockback_speed = 20.0
