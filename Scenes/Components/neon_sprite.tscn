@@ -3,20 +3,59 @@
 [ext_resource type="Script" path="res://Scripts/Components/neon_sprite.gd" id="1_tnt81"]
 [ext_resource type="Material" uid="uid://nn7mrovsf5fm" path="res://Materials/Components/neon_sprite.tres" id="2_25kt2"]
 
-[sub_resource type="Curve" id="Curve_r28k8"]
-min_value = 1.0
+[sub_resource type="Curve" id="Curve_i227v"]
 max_value = 2.0
-_data = [Vector2(0, 2), 0.0, -3.1405, 0, 0, Vector2(0.997625, 1.0179), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 2), 0.0, -6.18414, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+metadata/_snap_enabled = true
 
-[node name="NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_glow_sprite")]
+[node name="NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_blurred_sprite")]
 script = ExtResource("1_tnt81")
+_color = Color(1, 1, 1, 1)
+_damage_flash_curve = SubResource("Curve_i227v")
+_damage_flash_duration = 0.35
 _base_sprite = NodePath("BaseSprite")
-_glow_sprite = NodePath("GlowSprite")
-_damage_flash_curve = SubResource("Curve_r28k8")
-_damage_flash_duration = 0.4
+_blurred_sprite = NodePath("BlurredSprite")
+metadata/_access_modifiers = {
+"_base_sprite": 2,
+"_blurred_sprite": 2,
+"_damage_flash_curve": 2,
+"_damage_flash_duration": 2,
+"auto_translate_mode": 2,
+"base_sprite": 2,
+"base_sprite_node": 2,
+"base_sprite_ref": 2,
+"blurred_sprite": 2,
+"blurred_sprite_ref": 2,
+"clip_children": 2,
+"damage_flash_curve": 2,
+"editor_description": 2,
+"light_mask": 2,
+"material": 2,
+"modulate": 2,
+"physics_interpolation_mode": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"ref_base_sprite": 2,
+"ref_blurred_sprite": 2,
+"script": 2,
+"self_modulate": 2,
+"show_behind_parent": 2,
+"skew": 2,
+"texture_filter": 2,
+"texture_repeat": 2,
+"top_level": 2,
+"use_parent_material": 2,
+"visibility_layer": 2,
+"visible": 2,
+"y_sort_enabled": 2,
+"z_as_relative": 2,
+"z_index": 2
+}
 
-[node name="GlowSprite" type="Sprite2D" parent="."]
+[node name="BlurredSprite" type="Sprite2D" parent="."]
 material = ExtResource("2_25kt2")
 scale = Vector2(0.75, 0.75)
 

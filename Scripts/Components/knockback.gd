@@ -5,6 +5,8 @@ signal updated(position_offset: Vector2)
 signal started
 signal finished
 
+## Required for knockback to work, as the module automatically
+## passes knockback related calculations to the [MovementComponent].
 @export var movement: MovementComponent
 
 var is_active: bool

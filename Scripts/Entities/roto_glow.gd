@@ -12,12 +12,15 @@ var tmp_moved_amt: float = 0.0
 #func _ready():
 	#pass
 
-func _physics_process(delta: float) -> void:
-	neon_sprite.hue_shift_amount += 0.01
+#func _physics_process(delta: float) -> void:
+	#neon_sprite.hue_shift_amount += 0.01
 
 func _process(delta: float) -> void:
 	rotation += 7.5 * delta
-	
+
+
+	return
+		
 	var amt: float = 128 * delta
 	
 	if tmp_adding:

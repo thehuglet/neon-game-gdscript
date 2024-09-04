@@ -1,15 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwfummrg3wl5d"]
+[gd_scene load_steps=8 format=3 uid="uid://cwfummrg3wl5d"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/roto_glow.gd" id="1_851yn"]
-[ext_resource type="PackedScene" uid="uid://ckmg2ptd1cqyt" path="res://Scenes/Components/collision_attack.tscn" id="2_ppj6w"]
 [ext_resource type="PackedScene" uid="uid://bxj0bqohqh26q" path="res://Scenes/Components/neon_sprite.tscn" id="2_xisc8"]
-[ext_resource type="Texture2D" uid="uid://cl8makmq454xa" path="res://Textures/Entity/RotoGlow/Roto_0.png" id="3_3lfnb"]
-[ext_resource type="Texture2D" uid="uid://drfwie67et37p" path="res://Textures/Entity/RotoGlow/Roto_0__Blur_5.png" id="4_2x52o"]
+[ext_resource type="Texture2D" uid="uid://cl8makmq454xa" path="res://Textures/Entities/RotoGlow/Roto_0.png" id="3_3lfnb"]
+[ext_resource type="Texture2D" uid="uid://drfwie67et37p" path="res://Textures/Entities/RotoGlow/Roto_0__Blur_5.png" id="4_2x52o"]
 [ext_resource type="PackedScene" uid="uid://ed1aikfvg2ij" path="res://Scenes/Components/hurtbox.tscn" id="6_c6322"]
 [ext_resource type="PackedScene" uid="uid://b8oa8ah2t18qu" path="res://Scenes/Components/health.tscn" id="7_3qqtu"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_vkx4w"]
-radius = 21.9317
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42tqt"]
 radius = 31.0
@@ -21,23 +17,13 @@ script = ExtResource("1_851yn")
 neon_sprite = NodePath("NeonSprite")
 
 [node name="NeonSprite" parent="." instance=ExtResource("2_xisc8")]
-base_texture = ExtResource("3_3lfnb")
-glow_texture = ExtResource("4_2x52o")
-glow_color = Color(1, 0, 0, 1)
-
-[node name="CollisionAttack" parent="." instance=ExtResource("2_ppj6w")]
-collision_layer = 0
-knockback_distance = 120
-knockback_speed = 30.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAttack"]
-position = Vector2(1, 0)
-shape = SubResource("CircleShape2D_vkx4w")
+_base_texture = ExtResource("3_3lfnb")
+_blurred_texture = ExtResource("4_2x52o")
+_color = Color(1, 0, 1, 1)
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_c6322")]
 shape = SubResource("CircleShape2D_42tqt")
 health = NodePath("../Health")
-knockback = NodePath("")
 
 [node name="Health" parent="." node_paths=PackedStringArray("hurtbox", "neon_sprite") instance=ExtResource("7_3qqtu")]
 health = 99

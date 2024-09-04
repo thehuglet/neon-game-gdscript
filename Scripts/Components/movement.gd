@@ -1,5 +1,12 @@
 class_name MovementComponent
-extends Node2D
+extends Node
+## Signal [code]updated(position_offset: Vector2)[/code] returns a position offset.
+## Connect it to the entity script and [b]ADD it to the entity position[/b] for forward movement.[br]
+## Usage:
+## [codeblock]
+## func _on_movement_updated(position_offset):
+##     self.position += position_offset
+## [/codeblock]
 
 signal updated(position_offset: Vector2)
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ed1aikfvg2ij"]
+[gd_scene load_steps=2 format=3 uid="uid://j2y7hsqow5ky"]
 
-[ext_resource type="Script" path="res://Scripts/Components/hurtbox.gd" id="1_63l20"]
+[ext_resource type="Script" path="res://Scripts/Components/collision_hitbox.gd" id="1_mvx44"]
 
-[node name="Hurtbox" type="CollisionShape2D"]
-debug_color = Color(0.711143, 0.355338, 0.838745, 0.42)
-script = ExtResource("1_63l20")
+[node name="CollisionHitbox" type="CollisionShape2D"]
+debug_color = Color(1, 0, 1, 0.419608)
+script = ExtResource("1_mvx44")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
 "debug_color": 2,
@@ -19,6 +19,7 @@ metadata/_access_modifiers = {
 "process_physics_priority": 2,
 "process_priority": 2,
 "process_thread_group": 2,
+"scale": 0,
 "script": 2,
 "self_modulate": 2,
 "show_behind_parent": 2,

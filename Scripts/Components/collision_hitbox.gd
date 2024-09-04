@@ -1,0 +1,2 @@
+class_name CollisionHitboxComponent
+extends CollisionShape2D

@@ -6,7 +6,7 @@
 [node name="DevLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_b2tug")]
-position = Vector2(710, 311)
+position = Vector2(890, 243)
 
 [node name="RotoGlow" parent="." instance=ExtResource("2_3uj0v")]
-position = Vector2(1151, 314)
+position = Vector2(1109, 230)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cebw5sb776kfa"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/player.gd" id="1_dwib3"]
+[ext_resource type="PackedScene" uid="uid://cl1ljismvjx5v" path="res://Scenes/Components/movement.tscn" id="2_mx63p"]
+[ext_resource type="PackedScene" uid="uid://b8oa8ah2t18qu" path="res://Scenes/Components/health.tscn" id="2_u7ibn"]
+[ext_resource type="PackedScene" uid="uid://bxj0bqohqh26q" path="res://Scenes/Components/neon_sprite.tscn" id="3_6w4gn"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite", "movement")]
+collision_mask = 0
+script = ExtResource("1_dwib3")
+neon_sprite = NodePath("NeonSprite")
+movement = NodePath("Movement")
+
+[node name="NeonSprite" parent="." instance=ExtResource("3_6w4gn")]
+metadata/_access_modifiers = {
+"auto_translate_mode": 2,
+"editor_description": 2,
+"physics_interpolation_mode": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"script": 2
+}
+
+[node name="Health" parent="." instance=ExtResource("2_u7ibn")]
+health = 10
+max_health = 10
+recovery_time_sec = 1.0
+
+[node name="Movement" parent="." instance=ExtResource("2_mx63p")]
+
+[connection signal="updated" from="Movement" to="." method="_on_movement_updated"]

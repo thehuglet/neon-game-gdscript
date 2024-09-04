@@ -2,6 +2,16 @@
 
 [ext_resource type="Script" path="res://Scripts/Components/movement.gd" id="1_51l4o"]
 
-[node name="Movement" type="Node2D"]
+[node name="Movement" type="Node"]
 script = ExtResource("1_51l4o")
 movement_speed = 300
+metadata/_access_modifiers = {
+"auto_translate_mode": 2,
+"editor_description": 2,
+"physics_interpolation_mode": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"script": 2
+}

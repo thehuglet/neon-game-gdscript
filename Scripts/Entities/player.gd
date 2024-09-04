@@ -1,9 +1,7 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 # TODO: do player recovery flashes using a curve
-
-#@export var test: Curve
 
 @export var neon_sprite: NeonSpriteComponent
 @export var movement: MovementComponent
