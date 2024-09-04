@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/hurtbox.gd" id="1_63l20"]
 
 [node name="Hurtbox" type="CollisionShape2D"]
-debug_color = Color(0.711143, 0.355338, 0.838745, 0.42)
+debug_color = Color(0, 1, 0, 0.419608)
 script = ExtResource("1_63l20")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,

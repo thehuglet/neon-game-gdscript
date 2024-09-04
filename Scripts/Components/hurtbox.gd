@@ -28,7 +28,7 @@ func enable_collision() -> void:
 	set_deferred('disabled', false)
 
 ## HealthComponent (auto-connect)
-func _on_health_started_recovering() -> void:
+func _on_health_started_recovering(recovery_time: float) -> void:
 	disable_collision()
 
 ## HealthComponent (auto-connect)

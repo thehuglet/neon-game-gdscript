@@ -1,5 +1,5 @@
-extends CharacterBody2D
 class_name RotoGlow
+extends CharacterBody2D
 
 @export var neon_sprite: NeonSpriteComponent
 

@@ -4,10 +4,10 @@ extends Node
 signal health_changed
 signal took_damage
 signal died
-signal started_recovering
+signal started_recovering(recovery_time: float)
 signal finished_recovering
 
-# TODO: add health debug and other debug options for components (togglable in inspector)
+# TODO: add health debug and other debug options for components (togglable in inspector) (prob needs @tool, lots of work lol)
 
 @export var health: int
 @export var max_health: int
@@ -34,6 +34,7 @@ func _ready() -> void:
 		finished_recovering.connect(hurtbox._on_health_finished_recovering)
 	if neon_sprite != null:
 		took_damage.connect(neon_sprite._on_health_took_damage)
+		started_recovering.connect(neon_sprite._on_health_started_recovering)
 
 func _physics_process(delta: float) -> void:
 	if !is_recovering:
@@ -61,7 +62,7 @@ func damage(damage_amount: int) -> void:
 	elif uses_recovery:
 		is_recovering = true
 		_remaining_recovery_time = recovery_time_sec
-		started_recovering.emit()
+		started_recovering.emit(recovery_time_sec)
 
 func heal(heal_amount: int) -> void:
 	health = mini(max_health, heal_amount)

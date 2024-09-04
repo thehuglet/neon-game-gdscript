@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cebw5sb776kfa"]
+[gd_scene load_steps=14 format=3 uid="uid://cebw5sb776kfa"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/player.gd" id="1_dwib3"]
 [ext_resource type="PackedScene" uid="uid://cl1ljismvjx5v" path="res://Scenes/Components/movement.tscn" id="2_mx63p"]
@@ -10,6 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://ckmg2ptd1cqyt" path="res://Scenes/Components/collision_attack.tscn" id="7_0tgnn"]
 [ext_resource type="PackedScene" uid="uid://cuokuxnl7sucn" path="res://Scenes/Components/knockback.tscn" id="7_wkkk1"]
 [ext_resource type="PackedScene" uid="uid://j2y7hsqow5ky" path="res://Scenes/Components/collision_hitbox.tscn" id="8_6yokh"]
+
+[sub_resource type="Curve" id="Curve_51f2r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.181058, 0.408451), 0.0, 0.0, 0, 0, Vector2(0.32312, 0), 0.0, 0.0, 0, 0, Vector2(0.462396, 0.528169), 0.0, 0.0, 0, 0, Vector2(0.593315, 0), 0.0, 0.0, 0, 0, Vector2(0.729805, 0.78169), 0.0, 0.0, 0, 0, Vector2(0.86351, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_no1qg"]
+radius = 33.7343
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_un6mb"]
 radius = 33.0606
@@ -63,12 +70,14 @@ metadata/_access_modifiers = {
 "z_index": 2
 }
 
-[node name="Knockback" parent="." instance=ExtResource("7_wkkk1")]
+[node name="Knockback" parent="." node_paths=PackedStringArray("movement") instance=ExtResource("7_wkkk1")]
+movement = NodePath("../Movement")
 
 [node name="NeonSprite" parent="." instance=ExtResource("3_6w4gn")]
 _base_texture = ExtResource("3_wakmc")
 _blurred_texture = ExtResource("4_f5h8c")
 _color = Color(0, 1, 1, 1)
+_recovery_flash_curve = SubResource("Curve_51f2r")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
 "editor_description": 2,
@@ -80,19 +89,26 @@ metadata/_access_modifiers = {
 "script": 2
 }
 
-[node name="Health" parent="." instance=ExtResource("2_u7ibn")]
+[node name="Health" parent="." node_paths=PackedStringArray("neon_sprite", "hurtbox") instance=ExtResource("2_u7ibn")]
 health = 10
 max_health = 10
-recovery_time_sec = 1.0
+recovery_time_sec = 1.5
+neon_sprite = NodePath("../NeonSprite")
+hurtbox = NodePath("../Hurtbox")
 
 [node name="Movement" parent="." instance=ExtResource("2_mx63p")]
 
-[node name="Hurtbox" parent="." instance=ExtResource("6_ko7xh")]
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health", "knockback") instance=ExtResource("6_ko7xh")]
+shape = SubResource("CircleShape2D_no1qg")
+debug_color = Color(0, 1, 0, 0.419608)
+health = NodePath("../Health")
+knockback = NodePath("../Knockback")
 
 [node name="CollisionAttack" parent="." instance=ExtResource("7_0tgnn")]
 collision_mask = 2
 
 [node name="CollisionHitbox" parent="CollisionAttack" instance=ExtResource("8_6yokh")]
 shape = SubResource("CircleShape2D_un6mb")
+debug_color = Color(1, 0, 1, 0.419608)
 
 [connection signal="updated" from="Movement" to="." method="_on_movement_updated"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxj0bqohqh26q"]
+[gd_scene load_steps=5 format=3 uid="uid://bxj0bqohqh26q"]
 
 [ext_resource type="Script" path="res://Scripts/Components/neon_sprite.gd" id="1_tnt81"]
 [ext_resource type="Material" uid="uid://nn7mrovsf5fm" path="res://Materials/Components/neon_sprite.tres" id="2_25kt2"]
+[ext_resource type="Material" uid="uid://dx2ma6dkoddk1" path="res://Materials/Components/neon_sprite_base.tres" id="3_s8wm8"]
 
 [sub_resource type="Curve" id="Curve_i227v"]
 max_value = 2.0
@@ -21,6 +22,7 @@ metadata/_access_modifiers = {
 "_blurred_sprite": 2,
 "_damage_flash_curve": 2,
 "_damage_flash_duration": 2,
+"_recovery_flash_curve": 0,
 "auto_translate_mode": 2,
 "base_sprite": 2,
 "base_sprite_node": 2,
@@ -60,4 +62,5 @@ material = ExtResource("2_25kt2")
 scale = Vector2(0.75, 0.75)
 
 [node name="BaseSprite" type="Sprite2D" parent="."]
+material = ExtResource("3_s8wm8")
 scale = Vector2(0.75, 0.75)

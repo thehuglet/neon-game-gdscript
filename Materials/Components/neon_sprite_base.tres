@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dx2ma6dkoddk1"]
+
+[ext_resource type="Shader" path="res://Shaders/Components/NeonSprite/base_sprite.gdshader" id="1_hmoad"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_hmoad")
+shader_parameter/alpha = 1.0
