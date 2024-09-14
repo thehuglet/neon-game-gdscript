@@ -17,8 +17,8 @@ var tmp_moved_amt: float = 0.0
 
 func _process(delta: float) -> void:
 	rotation += 7.5 * delta
-
-
+	
+	
 	return
 		
 	var amt: float = 128 * delta

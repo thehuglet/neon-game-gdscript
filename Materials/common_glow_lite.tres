@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cobi8h4ko008c"]
+
+[ext_resource type="Shader" path="res://Shaders/common_glow_lite.gdshader" id="1_gr4si"]
+
+[resource]
+shader = ExtResource("1_gr4si")
+shader_parameter/color = Color(0, 1, 1, 1)

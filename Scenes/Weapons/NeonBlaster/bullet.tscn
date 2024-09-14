@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://fefvlct66bar"]
+
+[ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://Textures/Projectiles/Projectile_0.png" id="1_qmxgf"]
+[ext_resource type="Script" path="res://Scripts/Weapons/NeonBlaster/bullet.gd" id="2_j2tl1"]
+[ext_resource type="Texture2D" uid="uid://bwpyabh8londt" path="res://Textures/Projectiles/Projectile_0__Blur_5.png" id="3_cqa8v"]
+[ext_resource type="PackedScene" uid="uid://pyyisb5h8y2j" path="res://Scenes/Components/neon_sprite_lite.tscn" id="3_m33xe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngufr"]
+
+[node name="Bullet" type="Area2D"]
+collision_mask = 2
+script = ExtResource("2_j2tl1")
+
+[node name="NeonSpriteLite" parent="." instance=ExtResource("3_m33xe")]
+texture = ExtResource("1_qmxgf")
+_blurred_texture = ExtResource("3_cqa8v")
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_ngufr")
+
+[connection signal="post_physics_process" from="." to="." method="_on_post_physics_process"]
+[connection signal="post_process" from="." to="." method="_on_post_process"]

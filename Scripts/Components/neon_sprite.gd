@@ -58,6 +58,7 @@ func _physics_process(delta: float) -> void:
 		
 		set_shader_uniform(U_EXPAND_RADIUS, _damage_flash_curve.sample(curve_time))
 		set_shader_uniform(U_SATURATION, curve_time)
+
 	if is_recovery_flash_running:
 		_remaining_recovery_flash_time = max(_remaining_recovery_flash_time - delta, 0.0)
 		
@@ -65,6 +66,9 @@ func _physics_process(delta: float) -> void:
 		
 		set_shader_uniform(U_ALPHA, _recovery_flash_curve.sample(curve_time))
 		#set_shader_uniform(U_HUE_SHIFT, -(1.0 - curve_time) / 10)
+
+		# TODO: change saturation to some other way of turning the sprite white, looks bad atm
+		#set_shader_uniform(U_SATURATION, clamp(curve_time, 0.5, 1.0))
 
 func set_shader_uniform(uniform_name: String, value: Variant) -> void:
 	if _blurred_sprite != null:

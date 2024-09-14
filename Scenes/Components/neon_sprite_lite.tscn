@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://pyyisb5h8y2j"]
+
+[ext_resource type="Script" path="res://Scripts/Components/neon_sprite_lite.gd" id="1_i6s0u"]
+[ext_resource type="Material" uid="uid://cobi8h4ko008c" path="res://Materials/common_glow_lite.tres" id="2_1isot"]
+
+[node name="NeonSpriteLite" type="Sprite2D" node_paths=PackedStringArray("_blurred_sprite")]
+script = ExtResource("1_i6s0u")
+color = Color(1, 1, 1, 1)
+_blurred_sprite = NodePath("BlurredSprite")
+metadata/_access_modifiers = {
+"_blurred_sprite": 2,
+"texture": 0
+}
+
+[node name="BlurredSprite" type="Sprite2D" parent="."]
+material = ExtResource("2_1isot")

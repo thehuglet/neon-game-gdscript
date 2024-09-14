@@ -72,7 +72,6 @@ _color = Color(1, 0, 1, 1)
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_c6322")]
 shape = SubResource("CircleShape2D_kbhtf")
-debug_color = Color(0, 1, 0, 0.419608)
 health = NodePath("../Health")
 
 [node name="Health" parent="." node_paths=PackedStringArray("neon_sprite") instance=ExtResource("7_3qqtu")]
@@ -85,4 +84,3 @@ collision_mask = 1
 
 [node name="CollisionHitbox" parent="CollisionAttack" instance=ExtResource("8_yimpk")]
 shape = SubResource("CircleShape2D_xw5nd")
-debug_color = Color(1, 0, 1, 0.419608)

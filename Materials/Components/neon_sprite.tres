@@ -5,7 +5,7 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_k4s32")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = null
 shader_parameter/alpha = 1.0
 shader_parameter/expand_radius = 0.0
 shader_parameter/hue_shift = 0.0

@@ -10,10 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ckmg2ptd1cqyt" path="res://Scenes/Components/collision_attack.tscn" id="7_0tgnn"]
 [ext_resource type="PackedScene" uid="uid://cuokuxnl7sucn" path="res://Scenes/Components/knockback.tscn" id="7_wkkk1"]
 [ext_resource type="PackedScene" uid="uid://j2y7hsqow5ky" path="res://Scenes/Components/collision_hitbox.tscn" id="8_6yokh"]
-
-[sub_resource type="Curve" id="Curve_51f2r"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.181058, 0.408451), 0.0, 0.0, 0, 0, Vector2(0.32312, 0), 0.0, 0.0, 0, 0, Vector2(0.462396, 0.528169), 0.0, 0.0, 0, 0, Vector2(0.593315, 0), 0.0, 0.0, 0, 0, Vector2(0.729805, 0.78169), 0.0, 0.0, 0, 0, Vector2(0.86351, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 8
+[ext_resource type="PackedScene" uid="uid://wirqmefschka" path="res://Scenes/Components/weapon_component.tscn" id="11_qgctg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_no1qg"]
 radius = 33.7343
@@ -21,11 +18,12 @@ radius = 33.7343
 [sub_resource type="CircleShape2D" id="CircleShape2D_un6mb"]
 radius = 33.0606
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite", "movement")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite", "movement", "weapon")]
 collision_mask = 0
 script = ExtResource("1_dwib3")
 neon_sprite = NodePath("NeonSprite")
 movement = NodePath("Movement")
+weapon = NodePath("Weapon")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
 "collision_layer": 2,
@@ -65,6 +63,7 @@ metadata/_access_modifiers = {
 "use_parent_material": 2,
 "visibility_layer": 2,
 "visible": 2,
+"weapon": 2,
 "y_sort_enabled": 2,
 "z_as_relative": 2,
 "z_index": 2
@@ -77,7 +76,6 @@ movement = NodePath("../Movement")
 _base_texture = ExtResource("3_wakmc")
 _blurred_texture = ExtResource("4_f5h8c")
 _color = Color(0, 1, 1, 1)
-_recovery_flash_curve = SubResource("Curve_51f2r")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
 "editor_description": 2,
@@ -100,7 +98,6 @@ hurtbox = NodePath("../Hurtbox")
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health", "knockback") instance=ExtResource("6_ko7xh")]
 shape = SubResource("CircleShape2D_no1qg")
-debug_color = Color(0, 1, 0, 0.419608)
 health = NodePath("../Health")
 knockback = NodePath("../Knockback")
 
@@ -109,6 +106,8 @@ collision_mask = 2
 
 [node name="CollisionHitbox" parent="CollisionAttack" instance=ExtResource("8_6yokh")]
 shape = SubResource("CircleShape2D_un6mb")
-debug_color = Color(1, 0, 1, 0.419608)
+
+[node name="Weapon" parent="." node_paths=PackedStringArray("owner_ref") instance=ExtResource("11_qgctg")]
+owner_ref = NodePath("..")
 
 [connection signal="updated" from="Movement" to="." method="_on_movement_updated"]
