@@ -17,20 +17,3 @@ var tmp_moved_amt: float = 0.0
 
 func _process(delta: float) -> void:
 	rotation += 7.5 * delta
-	
-	
-	return
-		
-	var amt: float = 128 * delta
-	
-	if tmp_adding:
-		tmp_moved_amt += amt
-		position.y += amt
-	else:
-		tmp_moved_amt -= amt
-		position.y -= amt
-	
-	if tmp_moved_amt >= 100:
-		tmp_adding = false
-	if tmp_moved_amt <= -100:
-		tmp_adding = true
