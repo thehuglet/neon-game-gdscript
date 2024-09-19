@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8oa8ah2t18qu"]
+[gd_scene load_steps=2 format=3 uid="uid://cq7rridrbgkmr"]
 
-[ext_resource type="Script" path="res://Scripts/Components/health.gd" id="1_o7ane"]
+[ext_resource type="Script" path="res://scripts/components/health.gd" id="1_6suvf"]
 
 [node name="Health" type="Node"]
-script = ExtResource("1_o7ane")
+script = ExtResource("1_6suvf")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
 "editor_description": 2,

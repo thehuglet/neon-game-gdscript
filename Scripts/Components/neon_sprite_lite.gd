@@ -1,20 +1,14 @@
-class_name NeonSpriteLiteComponent
+class_name NeonSpriteLite
 extends Sprite2D
 
-@export var _blurred_texture: Texture2D
-@export_color_no_alpha var color: Color
-@export var _blurred_sprite: Sprite2D
+@export var _glow_texture: Texture2D
+@export_color_no_alpha var _color: Color
 
-var blurred_mat: ShaderMaterial:
-	get:
-		return blurred_mat
-	set(value):
-		blurred_mat = value
+@export_category('References')
+@export var _glow_sprite: Sprite2D
+
+@onready var blurred_mat: ShaderMaterial = _glow_sprite.material
 
 func _ready() -> void:
-	_blurred_sprite.texture = _blurred_texture
-	blurred_mat = _blurred_sprite.material as ShaderMaterial
-	blurred_mat.set_shader_parameter('color', color)
-
-func _process(delta: float) -> void:
-	pass
+	_glow_sprite.texture = _glow_texture
+	blurred_mat.set_shader_parameter('u_color', _color)

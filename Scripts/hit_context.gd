@@ -1,4 +1,3 @@
-extends Node
 class_name HitContext
 
 var target: CharacterBody2D

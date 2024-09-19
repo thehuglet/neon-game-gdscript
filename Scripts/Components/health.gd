@@ -1,4 +1,4 @@
-class_name HealthComponent
+class_name Health
 extends Node
 
 signal health_changed
@@ -6,8 +6,6 @@ signal took_damage
 signal died
 signal started_recovering(recovery_time: float)
 signal finished_recovering
-
-# TODO: add health debug and other debug options for components (togglable in inspector) (prob needs @tool, lots of work lol)
 
 @export var health: int
 @export var max_health: int
@@ -19,22 +17,22 @@ signal finished_recovering
 
 @export_category('References')
 ## Enables automatic VFX on the entity sprite on damage & healing.
-@export var neon_sprite: NeonSpriteComponent
-## Enables automatic hurtbox disabling during recovery. [br][br]
+@export var _neon_sprite: NeonSprite
+## Enables automatic _hurtbox disabling during recovery. [br][br]
 ## This can be skipped if the recovery time on this entity is set to [code]0[/code].
-@export var hurtbox: HurtboxComponent
+@export var _hurtbox: Hurtbox
 
 var is_dead: bool = false
 var is_recovering: bool = false
 var _remaining_recovery_time: float = 0.0
 
 func _ready() -> void:
-	if hurtbox != null:
-		started_recovering.connect(hurtbox._on_health_started_recovering)
-		finished_recovering.connect(hurtbox._on_health_finished_recovering)
-	if neon_sprite != null:
-		took_damage.connect(neon_sprite._on_health_took_damage)
-		started_recovering.connect(neon_sprite._on_health_started_recovering)
+	if _hurtbox != null:
+		started_recovering.connect(_hurtbox._on_health_started_recovering)
+		finished_recovering.connect(_hurtbox._on_health_finished_recovering)
+	if _neon_sprite != null:
+		took_damage.connect(_neon_sprite._on_health_took_damage)
+		started_recovering.connect(_neon_sprite._on_health_started_recovering)
 
 func _physics_process(delta: float) -> void:
 	if !is_recovering:

@@ -1,17 +1,40 @@
-class_name WeaponHandlerComponent
+class_name WeaponHandler
 extends Node2D
 
-@export var weapon: Weapon
+@export var owner_ref: CharacterBody2D
 
+enum WeaponSlot {
+	SLOT_0,
+	SLOT_1,
+}
 
-# Called when the node enters the scene tree for the first time.
+var _weapons: Array[Weapon] = [null, null]
+var _selected_weapon: Weapon
+#var _selected_weapon_slot: int = 0
+
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	# TODO: temp weapon debug code, remove later
+	load_weapon(preload('res://scenes/weapons/neon_blaster.tscn') as PackedScene, WeaponSlot.SLOT_0)
+	
+	select_weapon_slot(WeaponSlot.SLOT_0)
 
 func fire_basic_attack() -> void:
-	print('fired!')
+	_selected_weapon.fire_basic_attack()
+
+func use_special() -> void:
+	_selected_weapon.use_special()
+
+func load_weapon(weapon: PackedScene, slot: WeaponSlot) -> void:
+	var weapon_instance: Weapon = weapon.instantiate() as Weapon
+	weapon_instance.assign_owner(owner_ref)
+	
+	_weapons[slot] = weapon_instance
+	add_child(_weapons[slot])
+
+func select_weapon_slot(slot: WeaponSlot) -> void:
+	if slot > len(_weapons):
+		return
+	
+	#_selected_weapon_slot = slot
+	_selected_weapon = _weapons[slot]
+

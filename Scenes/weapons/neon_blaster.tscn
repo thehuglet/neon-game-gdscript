@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://31sxo3x78n0i"]
+
+[ext_resource type="Script" path="res://scripts/weapons/neon_blaster.gd" id="1_ojbqm"]
+[ext_resource type="PackedScene" uid="uid://c0uwtmhh783vl" path="res://scenes/weapons/neon_blaster/projectile.tscn" id="2_0dr6e"]
+
+[node name="NeonBlaster" type="Node2D"]
+script = ExtResource("1_ojbqm")
+projectile = ExtResource("2_0dr6e")
+fire_rate = 8.0
+
+[connection signal="fired_basic_attack" from="." to="." method="_on_fired_basic_attack"]

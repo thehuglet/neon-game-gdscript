@@ -1,28 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwfummrg3wl5d"]
+[gd_scene load_steps=8 format=3 uid="uid://bx8mgga3wx3bq"]
 
-[ext_resource type="Script" path="res://Scripts/Entities/roto_glow.gd" id="1_851yn"]
-[ext_resource type="PackedScene" uid="uid://ckmg2ptd1cqyt" path="res://Scenes/Components/collision_attack.tscn" id="2_ppj6w"]
-[ext_resource type="PackedScene" uid="uid://bxj0bqohqh26q" path="res://Scenes/Components/neon_sprite.tscn" id="2_xisc8"]
-[ext_resource type="Texture2D" uid="uid://cl8makmq454xa" path="res://Textures/Entities/RotoGlow/Roto_0.png" id="3_3lfnb"]
-[ext_resource type="Texture2D" uid="uid://drfwie67et37p" path="res://Textures/Entities/RotoGlow/Roto_0__Blur_5.png" id="4_2x52o"]
-[ext_resource type="PackedScene" uid="uid://ed1aikfvg2ij" path="res://Scenes/Components/hurtbox.tscn" id="6_c6322"]
-[ext_resource type="PackedScene" uid="uid://b8oa8ah2t18qu" path="res://Scenes/Components/health.tscn" id="7_3qqtu"]
-[ext_resource type="PackedScene" uid="uid://j2y7hsqow5ky" path="res://Scenes/Components/collision_hitbox.tscn" id="8_yimpk"]
+[ext_resource type="Script" path="res://scripts/entities/roto_glow.gd" id="1_cyyx2"]
+[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/hurtbox.tscn" id="1_dqw14"]
+[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/neon_sprite.tscn" id="2_tdwr8"]
+[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/health.tscn" id="3_l5w0n"]
+[ext_resource type="Texture2D" uid="uid://cl8makmq454xa" path="res://textures/entities/roto_glow/roto_0.png" id="3_nkngy"]
+[ext_resource type="Texture2D" uid="uid://drfwie67et37p" path="res://textures/entities/roto_glow/roto_0_blur_5.png" id="4_qdneo"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kbhtf"]
-radius = 31.257
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xw5nd"]
-radius = 22.0227
+[sub_resource type="CircleShape2D" id="CircleShape2D_gjnhg"]
+radius = 35.9026
 
 [node name="RotoGlow" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite")]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_851yn")
+script = ExtResource("1_cyyx2")
 neon_sprite = NodePath("NeonSprite")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
-"collision_layer": 2,
+"collision_layer": 0,
 "collision_mask": 2,
 "collision_priority": 2,
 "disable_mode": 2,
@@ -42,13 +37,12 @@ metadata/_access_modifiers = {
 "platform_floor_layers": 2,
 "platform_on_leave": 2,
 "platform_wall_layers": 2,
-"position": 0,
 "process_mode": 2,
 "process_physics_priority": 2,
 "process_priority": 2,
 "process_thread_group": 2,
 "safe_margin": 2,
-"script": 2,
+"script": 0,
 "self_modulate": 2,
 "show_behind_parent": 2,
 "skew": 2,
@@ -65,22 +59,18 @@ metadata/_access_modifiers = {
 "z_index": 2
 }
 
-[node name="NeonSprite" parent="." instance=ExtResource("2_xisc8")]
-_base_texture = ExtResource("3_3lfnb")
-_blurred_texture = ExtResource("4_2x52o")
-_color = Color(1, 0, 1, 1)
+[node name="NeonSprite" parent="." instance=ExtResource("2_tdwr8")]
+_base_texture = ExtResource("3_nkngy")
+_glow_texture = ExtResource("4_qdneo")
+_color = Color(1, 0, 0, 1)
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_c6322")]
-shape = SubResource("CircleShape2D_kbhtf")
-health = NodePath("../Health")
-
-[node name="Health" parent="." node_paths=PackedStringArray("neon_sprite") instance=ExtResource("7_3qqtu")]
+[node name="Health" parent="." node_paths=PackedStringArray("_neon_sprite", "_hurtbox") instance=ExtResource("3_l5w0n")]
 health = 99
 max_health = 99
-neon_sprite = NodePath("../NeonSprite")
+_neon_sprite = NodePath("../NeonSprite")
+_hurtbox = NodePath("../Hurtbox")
 
-[node name="CollisionAttack" parent="." instance=ExtResource("2_ppj6w")]
-collision_mask = 1
-
-[node name="CollisionHitbox" parent="CollisionAttack" instance=ExtResource("8_yimpk")]
-shape = SubResource("CircleShape2D_xw5nd")
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("_health") instance=ExtResource("1_dqw14")]
+visible = false
+shape = SubResource("CircleShape2D_gjnhg")
+_health = NodePath("../Health")

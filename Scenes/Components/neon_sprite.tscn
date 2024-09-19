@@ -1,31 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxj0bqohqh26q"]
+[gd_scene load_steps=8 format=3 uid="uid://caygg648436r0"]
 
-[ext_resource type="Script" path="res://Scripts/Components/neon_sprite.gd" id="1_tnt81"]
-[ext_resource type="Material" uid="uid://nn7mrovsf5fm" path="res://Materials/Components/neon_sprite.tres" id="2_25kt2"]
-[ext_resource type="Material" uid="uid://dx2ma6dkoddk1" path="res://Materials/Components/neon_sprite_base.tres" id="3_s8wm8"]
+[ext_resource type="Script" path="res://scripts/components/neon_sprite.gd" id="1_vagxd"]
+[ext_resource type="Shader" path="res://shaders/components/neon_sprite/glow_sprite.gdshader" id="2_rvd64"]
+[ext_resource type="Shader" path="res://shaders/components/neon_sprite/base_sprite.gdshader" id="3_p112a"]
 
-[sub_resource type="Curve" id="Curve_i227v"]
-max_value = 2.0
-_data = [Vector2(0, 2), 0.0, -6.18414, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_jarft"]
+_data = [Vector2(0, 1), 0.0, -3.17855, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_urlxc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 metadata/_snap_enabled = true
 
-[sub_resource type="Curve" id="Curve_shsc3"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 0.75), 0.856425, 0.856425, 0, 0, Vector2(0.2, 0.75), -1.38662, -1.38662, 0, 0, Vector2(0.3, 0.1), 0.0, 0.0, 0, 0, Vector2(0.4, 0.85), 3.09868, 3.09868, 0, 0, Vector2(0.5, 0.85), -3.29279, -3.29279, 0, 0, Vector2(0.6, 0.15), 0.0, 0.0, 0, 0, Vector2(0.7, 0.85), 4.34027, 4.34027, 0, 0, Vector2(0.8, 0.85), -4.34185, -4.34185, 0, 0, Vector2(0.9, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 11
-metadata/_snap_enabled = true
-metadata/_snap_count = 20
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_auhy2"]
+resource_local_to_scene = true
+shader = ExtResource("2_rvd64")
+shader_parameter/u_color = Color(1, 1, 1, 1)
+shader_parameter/u_alpha = 1.0
+shader_parameter/u_expand_radius = 0.0
+shader_parameter/u_hue_shift = 0.0
+shader_parameter/u_saturation = 1.0
+shader_parameter/u_brightness = 1.0
+shader_parameter/u_luminance_factor = 0.0
 
-[node name="NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_blurred_sprite")]
-script = ExtResource("1_tnt81")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tq1u"]
+resource_local_to_scene = true
+shader = ExtResource("3_p112a")
+shader_parameter/u_alpha = 1.0
+
+[node name="NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_glow_sprite")]
+script = ExtResource("1_vagxd")
 _color = Color(1, 1, 1, 1)
-_damage_flash_curve = SubResource("Curve_i227v")
-_damage_flash_duration = 0.35
-_recovery_flash_curve = SubResource("Curve_shsc3")
+_damage_flash_curve = SubResource("Curve_jarft")
+_damage_flash_duration = 0.5
+_recovery_flash_curve = SubResource("Curve_urlxc")
 _base_sprite = NodePath("BaseSprite")
-_blurred_sprite = NodePath("BlurredSprite")
+_glow_sprite = NodePath("GlowSprite")
 metadata/_access_modifiers = {
 "_base_sprite": 2,
+"_blur_sprite": 2,
 "_blurred_sprite": 2,
 "_damage_flash_curve": 2,
 "_damage_flash_duration": 2,
@@ -64,10 +78,10 @@ metadata/_access_modifiers = {
 "z_index": 2
 }
 
-[node name="BlurredSprite" type="Sprite2D" parent="."]
-material = ExtResource("2_25kt2")
+[node name="GlowSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_auhy2")
 scale = Vector2(0.75, 0.75)
 
 [node name="BaseSprite" type="Sprite2D" parent="."]
-material = ExtResource("3_s8wm8")
+material = SubResource("ShaderMaterial_2tq1u")
 scale = Vector2(0.75, 0.75)

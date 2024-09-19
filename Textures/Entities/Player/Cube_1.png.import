@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0pvohn4er6l0"
-path="res://.godot/imported/Cube_1.png-72c67f91c9fbc3d3ff8a4fb1549593c8.ctex"
+path="res://.godot/imported/cube_1.png-c9b9ade3f98b92002af45a46376bbb83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Entities/Player/Cube_1.png"
-dest_files=["res://.godot/imported/Cube_1.png-72c67f91c9fbc3d3ff8a4fb1549593c8.ctex"]
+source_file="res://textures/entities/player/cube_1.png"
+dest_files=["res://.godot/imported/cube_1.png-c9b9ade3f98b92002af45a46376bbb83.ctex"]
 
 [params]
 

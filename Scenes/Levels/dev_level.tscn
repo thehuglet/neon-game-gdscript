@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnlwu20rodld4"]
 
-[ext_resource type="PackedScene" uid="uid://cebw5sb776kfa" path="res://Scenes/Entities/player.tscn" id="1_b2tug"]
-[ext_resource type="PackedScene" uid="uid://cwfummrg3wl5d" path="res://Scenes/Entities/roto_glow.tscn" id="2_3uj0v"]
+[ext_resource type="PackedScene" uid="uid://bq7xrh8wbpfwc" path="res://scenes/entities/player.tscn" id="1_yggs5"]
+[ext_resource type="PackedScene" uid="uid://bx8mgga3wx3bq" path="res://scenes/entities/roto_glow.tscn" id="2_1bll4"]
 
 [node name="DevLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_b2tug")]
-position = Vector2(890, 243)
+[node name="RotoGlow" parent="." instance=ExtResource("2_1bll4")]
+position = Vector2(1390, 325)
 
-[node name="RotoGlow" parent="." instance=ExtResource("2_3uj0v")]
-position = Vector2(1109, 230)
+[node name="Player" parent="." instance=ExtResource("1_yggs5")]
+position = Vector2(998, 319)

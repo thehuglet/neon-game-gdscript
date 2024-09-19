@@ -1,7 +1,7 @@
 class_name RotoGlow
 extends CharacterBody2D
 
-@export var neon_sprite: NeonSpriteComponent
+@export var neon_sprite: NeonSprite
 
 var tmp_adding: bool = false
 var tmp_moved_amt: float = 0.0
@@ -16,4 +16,4 @@ var tmp_moved_amt: float = 0.0
 	#neon_sprite.hue_shift_amount += 0.01
 
 func _process(delta: float) -> void:
-	rotation += 7.5 * delta
+	rotation += 4.5 * delta
