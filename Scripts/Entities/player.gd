@@ -18,9 +18,15 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed('basic_attack'):
 		weapon_handler.fire_basic_attack()
+	if Input.is_action_pressed('special'):
+		weapon_handler.use_special(WeaponHandler.InputMode.FULL_AUTO)
 
 func _input(input: InputEvent) -> void:
 	movement.movement_direction = Input.get_vector('left', 'right', 'up', 'down')
+
+	if input.is_action_pressed('special'):
+		weapon_handler.use_special(WeaponHandler.InputMode.SEMI_AUTO)
+		
 
 func _on_movement_updated(position_offset: Vector2) -> void:
 	position += position_offset

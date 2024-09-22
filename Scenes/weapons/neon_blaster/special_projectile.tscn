@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddhgyfnkpe7f2"]
+
+[ext_resource type="Script" path="res://scripts/weapons/neon_blaster/special_projectile.gd" id="1_krnsc"]
+[ext_resource type="PackedScene" uid="uid://cvy3fljofdj1w" path="res://scenes/weapons/neon_blaster/special_explosion.tscn" id="2_qjpof"]
+[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/neon_sprite_lite.tscn" id="2_w6dj8"]
+[ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="3_rvjss"]
+[ext_resource type="Texture2D" uid="uid://bwpyabh8londt" path="res://textures/projectiles/projectile_0_blur_5.png" id="4_i6hyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2y27"]
+
+[node name="SpecialProjectile" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_krnsc")
+explosion = ExtResource("2_qjpof")
+damage = 2
+speed = 1500
+
+[node name="NeonSpriteLite" parent="." instance=ExtResource("2_w6dj8")]
+scale = Vector2(2, 2)
+texture = ExtResource("3_rvjss")
+_glow_texture = ExtResource("4_i6hyp")
+_color = Color(1, 0, 1, 1)
+
+[node name="TriggerHitbox" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+scale = Vector2(1.7, 1.7)
+shape = SubResource("RectangleShape2D_y2y27")

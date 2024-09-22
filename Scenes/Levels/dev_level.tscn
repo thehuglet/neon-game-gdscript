@@ -8,5 +8,8 @@
 [node name="RotoGlow" parent="." instance=ExtResource("2_1bll4")]
 position = Vector2(1390, 325)
 
+[node name="RotoGlow2" parent="." instance=ExtResource("2_1bll4")]
+position = Vector2(1371, 394)
+
 [node name="Player" parent="." instance=ExtResource("1_yggs5")]
 position = Vector2(998, 319)

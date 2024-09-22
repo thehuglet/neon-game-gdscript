@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://4rcq2s5vvmvy"]
+
+[ext_resource type="Script" path="res://scripts/abstract/explosion.gd" id="1_ljojd"]
+
+[node name="Explosion" type="Area2D" node_paths=PackedStringArray("_hitbox")]
+monitorable = false
+script = ExtResource("1_ljojd")
+_hitbox = NodePath("Hitbox")
+metadata/_access_modifiers = {
+"_hitbox": 2
+}
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+debug_color = Color(0.866667, 0, 1, 0.364706)

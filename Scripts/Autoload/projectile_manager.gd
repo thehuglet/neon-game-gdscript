@@ -3,14 +3,6 @@ extends Node
 const SCREEN_SIZE_BUFFER: int = 100
 
 var active_projectiles: Array[Projectile] = []
-var debug_label: Label
-
-func _ready() -> void:
-	var d := Label.new()
-	d.position = Vector2(30, 30)
-
-	debug_label = d
-	add_child(debug_label)
 
 func _physics_process(delta: float) -> void:
 	for i in range(active_projectiles.size() - 1, -1, -1):

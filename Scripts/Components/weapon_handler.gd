@@ -8,6 +8,11 @@ enum WeaponSlot {
 	SLOT_1,
 }
 
+enum InputMode {
+	SEMI_AUTO,
+	FULL_AUTO,
+}
+
 var _weapons: Array[Weapon] = [null, null]
 var _selected_weapon: Weapon
 #var _selected_weapon_slot: int = 0
@@ -21,8 +26,9 @@ func _ready() -> void:
 func fire_basic_attack() -> void:
 	_selected_weapon.fire_basic_attack()
 
-func use_special() -> void:
-	_selected_weapon.use_special()
+func use_special(input_mode: InputMode) -> void:
+	if _selected_weapon.special_input_mode == input_mode:
+		_selected_weapon.use_special()
 
 func load_weapon(weapon: PackedScene, slot: WeaponSlot) -> void:
 	var weapon_instance: Weapon = weapon.instantiate() as Weapon

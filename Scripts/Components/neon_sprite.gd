@@ -56,7 +56,7 @@ func _update_damage_flash(delta: float) -> void:
 	var curve_time: float = 1.0 - (_remaining_damage_flash_time / _damage_flash_duration)
 	var curve_value: float = _damage_flash_curve.sample(curve_time)
 
-	_set_shader_uniform(_glow_sprite, 'u_expand_radius', curve_value)
+	_set_shader_uniform(_glow_sprite, 'u_expand_radius', curve_value * 1.5)
 	_set_shader_uniform(_glow_sprite, 'u_luminance_factor', curve_value)
 
 func _update_recovery_flash(delta: float) -> void:

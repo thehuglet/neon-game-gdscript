@@ -4,6 +4,7 @@ extends Node2D
 signal fired_basic_attack
 signal used_special
 
+@export_enum('SEMI_AUTO', 'FULL_AUTO') var special_input_mode: int
 @export var fire_rate: float = 1.0:
 	get:
 		return fire_rate
