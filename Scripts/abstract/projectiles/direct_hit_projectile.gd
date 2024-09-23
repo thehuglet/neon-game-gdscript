@@ -12,13 +12,13 @@ var _targets_hit: int = 0
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-
+	
 	super()
 
 func _on_body_entered(body: CharacterBody2D) -> void:
 	if _targets_hit > punch_through:
 		return
-
+	
 	var ctx: HitContext = HitContext.new(body)
 	ctx.damage = damage
 	SignalBus.entity_hit.emit(ctx)
@@ -26,5 +26,5 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 	_targets_hit += 1
 
 	if _targets_hit > punch_through:
-		queue_free()
+		despawn()
 	

@@ -14,7 +14,8 @@ func _physics_process(delta: float) -> void:
 			continue
 		
 		if _is_out_of_screen_bounds(projectile):
-			projectile.queue_free()
+			# projectile.queue_free()
+			projectile.despawn()
 			active_projectiles.remove_at(i)
 
 func spawn_projectile(ctx: ProjectileContext) -> void:

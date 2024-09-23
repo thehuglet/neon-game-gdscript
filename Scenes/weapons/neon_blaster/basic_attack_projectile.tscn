@@ -1,17 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0uwtmhh783vl"]
+[gd_scene load_steps=9 format=3 uid="uid://c0uwtmhh783vl"]
 
-[ext_resource type="Script" path="res://scripts/abstract/projectiles/direct_hit_projectile.gd" id="1_bent3"]
+[ext_resource type="Script" path="res://scripts/weapons/neon_blaster/basic_projectile.gd" id="1_ihbut"]
 [ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/neon_sprite_lite.tscn" id="2_glvl3"]
 [ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="3_ty610"]
 [ext_resource type="Texture2D" uid="uid://bwpyabh8londt" path="res://textures/projectiles/projectile_0_blur_5.png" id="4_i66mo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjliq"]
 
-[node name="NeonBlasterProjectile" type="Area2D"]
+[sub_resource type="Curve" id="Curve_xq22c"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r5uqr"]
+curve = SubResource("Curve_xq22c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5d1h2"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_r5uqr")
+
+[node name="NeonBlasterProjectile" type="Area2D" node_paths=PackedStringArray("particle")]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_bent3")
-speed = 1200
+script = ExtResource("1_ihbut")
+particle = NodePath("GPUParticles2D")
 
 [node name="NeonSpriteLite" parent="." instance=ExtResource("2_glvl3")]
 texture = ExtResource("3_ty610")
@@ -21,3 +34,10 @@ _color = Color(0, 1, 1, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 0.785398
 shape = SubResource("RectangleShape2D_xjliq")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_5d1h2")
+texture = ExtResource("3_ty610")
+lifetime = 0.3
