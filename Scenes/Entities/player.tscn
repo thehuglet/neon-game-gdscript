@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq7xrh8wbpfwc"]
+[gd_scene load_steps=12 format=3 uid="uid://bq7xrh8wbpfwc"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_bo2js"]
 [ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/neon_sprite.tscn" id="1_wynst"]
@@ -8,12 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bcva1sly8stv2" path="res://scenes/components/movement.tscn" id="5_amynw"]
 [ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/health.tscn" id="6_juyca"]
 [ext_resource type="PackedScene" uid="uid://djkcbtpq4v3ga" path="res://scenes/components/knockback.tscn" id="8_fbmcm"]
+[ext_resource type="PackedScene" uid="uid://cc8eoj0abxtxb" path="res://scenes/components/motion.tscn" id="8_is5rq"]
 [ext_resource type="PackedScene" uid="uid://cexkoaeot0lc0" path="res://scenes/components/weapon_handler.tscn" id="9_e4dyl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rof73"]
 radius = 32.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite", "movement", "weapon_handler")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite", "movement", "weapon_handler", "motion")]
 position = Vector2(0, 1)
 collision_layer = 0
 collision_mask = 0
@@ -21,6 +22,7 @@ script = ExtResource("1_bo2js")
 neon_sprite = NodePath("NeonSprite")
 movement = NodePath("Movement")
 weapon_handler = NodePath("WeaponHandler")
+motion = NodePath("Movement/Motion")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,
 "collision_layer": 0,
@@ -75,10 +77,7 @@ _color = Color(0, 1, 1, 1)
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("_health", "_knockback") instance=ExtResource("2_1j7i0")]
 shape = SubResource("CircleShape2D_rof73")
 _health = NodePath("../Health")
-_knockback = NodePath("../Knockback")
-
-[node name="Movement" parent="." instance=ExtResource("5_amynw")]
-movement_speed = 350
+_knockback = NodePath("../Movement/Knockback")
 
 [node name="Health" parent="." node_paths=PackedStringArray("_neon_sprite", "_hurtbox") instance=ExtResource("6_juyca")]
 health = 4
@@ -87,10 +86,16 @@ recovery_time_sec = 0.75
 _neon_sprite = NodePath("../NeonSprite")
 _hurtbox = NodePath("../Hurtbox")
 
-[node name="Knockback" parent="." node_paths=PackedStringArray("_movement") instance=ExtResource("8_fbmcm")]
-_movement = NodePath("../Movement")
-
 [node name="WeaponHandler" parent="." node_paths=PackedStringArray("owner_ref") instance=ExtResource("9_e4dyl")]
 owner_ref = NodePath("..")
+
+[node name="Movement" parent="." instance=ExtResource("5_amynw")]
+movement_speed = 350
+
+[node name="Motion" parent="Movement" node_paths=PackedStringArray("_movement") instance=ExtResource("8_is5rq")]
+_movement = NodePath("..")
+
+[node name="Knockback" parent="Movement" node_paths=PackedStringArray("_movement") instance=ExtResource("8_fbmcm")]
+_movement = NodePath("..")
 
 [connection signal="updated" from="Movement" to="." method="_on_movement_updated"]

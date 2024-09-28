@@ -1,4 +1,4 @@
-class_name Knockback
+class_name Motion
 extends Node
 
 signal updated(position_offset: Vector2)
@@ -6,8 +6,8 @@ signal started
 signal finished
 
 @export_category('References')
-## Required for knockback to work, as the module automatically
-## passes knockback related calculations to the [Movement] component.
+## Required for motion to work, as the module automatically
+## passes motion related calculations to the [Movement] component.
 @export var _movement: Movement
 
 var is_active: bool
@@ -19,20 +19,6 @@ var _elapsed_time: float
 
 const _BASE_MOTION_MULTIPLIER = 1.5
 const _BASE_SPEED_MULTIPLIER = 30
-
-func apply(current_pos: Vector2, motion: Vector2, speed: float) -> void:
-	motion *= _BASE_MOTION_MULTIPLIER
-	
-	_start_pos = current_pos
-	_end_pos = current_pos + motion
-	_duration = motion.length() / (speed * _BASE_SPEED_MULTIPLIER);
-	_elapsed_time = 0
-	is_active = true
-	started.emit()
-	_last_offset = Vector2.ZERO
-
-func _ease_out_quad(t: float) -> float:
-	return t * (2 - t)
 
 func _ready() -> void:
 	if _movement != null:
@@ -60,3 +46,17 @@ func _process(delta: float) -> void:
 	var offset: Vector2 = current_offset - _last_offset
 	_last_offset = current_offset
 	updated.emit(offset)
+
+func apply(current_pos: Vector2, motion: Vector2, speed: float) -> void:
+	motion *= _BASE_MOTION_MULTIPLIER
+	
+	_start_pos = current_pos
+	_end_pos = current_pos + motion
+	_duration = motion.length() / (speed * _BASE_SPEED_MULTIPLIER);
+	_elapsed_time = 0
+	is_active = true
+	started.emit()
+	_last_offset = Vector2.ZERO
+
+func _ease_out_quad(t: float) -> float:
+	return t * (2 - t)

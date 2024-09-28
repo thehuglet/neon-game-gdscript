@@ -43,8 +43,10 @@ func _on_knockback_updated(position_offset: Vector2) -> void:
 
 ## Knockback (auto-connect)
 func _on_knockback_started() -> void:
-	can_move = false
+	# can_move = false
+	pass
 
 ## Knockback (auto-connect)
 func _on_knockback_finished() -> void:
-	can_move = true
+	# can_move = true
+	pass
