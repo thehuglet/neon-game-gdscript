@@ -10,7 +10,7 @@ func _ready() -> void:
 	
 	super()
 
-func _process(delta: float) -> void:
-	particle.emit_particle(Transform2D(), Vector2.ZERO, Color.RED, Color.WHITE, 0)
+# func _process(delta: float) -> void:
+# 	particle.emit_particle(Transform2D(), Vector2.ZERO, Color.RED, Color.WHITE, 0)
 
-	super(delta)
+# 	super(delta)

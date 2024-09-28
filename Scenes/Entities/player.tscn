@@ -70,7 +70,7 @@ metadata/_access_modifiers = {
 [node name="NeonSprite" parent="." instance=ExtResource("1_wynst")]
 _base_texture = ExtResource("2_w44gq")
 _glow_texture = ExtResource("3_4e71p")
-_color = Color(0.615686, 0.0901961, 1, 1)
+_color = Color(0, 1, 1, 1)
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("_health", "_knockback") instance=ExtResource("2_1j7i0")]
 shape = SubResource("CircleShape2D_rof73")

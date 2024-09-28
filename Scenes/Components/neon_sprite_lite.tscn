@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://butfrbwfgjdjb"]
+[gd_scene load_steps=5 format=3 uid="uid://butfrbwfgjdjb"]
 
 [ext_resource type="Script" path="res://scripts/components/neon_sprite_lite.gd" id="1_afmg0"]
-[ext_resource type="Shader" path="res://shaders/components/neon_sprite_lite/glow_sprite.gdshader" id="2_8jexy"]
+[ext_resource type="Shader" path="res://shaders/components/neon_sprite_lite.gdshader" id="1_b4dfi"]
+[ext_resource type="Texture2D" uid="uid://bwpyabh8londt" path="res://textures/projectiles/projectile_0_blur_5.png" id="3_o3x27"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w4h7p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1g5kt"]
 resource_local_to_scene = true
-shader = ExtResource("2_8jexy")
-shader_parameter/u_color = null
+shader = ExtResource("1_b4dfi")
+shader_parameter/u_color = Color(1, 1, 1, 1)
+shader_parameter/u_glow_texture = ExtResource("3_o3x27")
 
-[node name="NeonSpriteLite" type="Sprite2D" node_paths=PackedStringArray("_glow_sprite")]
+[node name="NeonSpriteLite" type="Sprite2D"]
+material = SubResource("ShaderMaterial_1g5kt")
 script = ExtResource("1_afmg0")
 _color = Color(1, 1, 1, 1)
-_glow_sprite = NodePath("GlowSprite")
 metadata/_access_modifiers = {
 "_glow_sprite": 2,
 "auto_translate_mode": 2,
@@ -24,7 +26,7 @@ metadata/_access_modifiers = {
 "frame_coords": 2,
 "hframes": 2,
 "light_mask": 2,
-"material": 2,
+"material": 0,
 "modulate": 2,
 "offset": 2,
 "physics_interpolation_mode": 2,
@@ -50,6 +52,3 @@ metadata/_access_modifiers = {
 "z_as_relative": 2,
 "z_index": 2
 }
-
-[node name="GlowSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_w4h7p")
