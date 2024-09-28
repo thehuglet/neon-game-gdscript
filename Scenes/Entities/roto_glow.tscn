@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx8mgga3wx3bq"]
+[gd_scene load_steps=10 format=3 uid="uid://bx8mgga3wx3bq"]
 
 [ext_resource type="Script" path="res://scripts/entities/roto_glow.gd" id="1_cyyx2"]
 [ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/hurtbox.tscn" id="1_dqw14"]
@@ -6,9 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/health.tscn" id="3_l5w0n"]
 [ext_resource type="Texture2D" uid="uid://cl8makmq454xa" path="res://textures/entities/roto_glow/roto_0.png" id="3_nkngy"]
 [ext_resource type="Texture2D" uid="uid://drfwie67et37p" path="res://textures/entities/roto_glow/roto_0_blur_5.png" id="4_qdneo"]
+[ext_resource type="PackedScene" uid="uid://bx23ob26rh3j8" path="res://scenes/components/collision_attack.tscn" id="7_ivspy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjnhg"]
 radius = 35.9026
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yx5su"]
+radius = 27.0
 
 [node name="RotoGlow" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite")]
 collision_layer = 2
@@ -74,3 +78,9 @@ _hurtbox = NodePath("../Hurtbox")
 visible = false
 shape = SubResource("CircleShape2D_gjnhg")
 _health = NodePath("../Health")
+
+[node name="CollisionAttack" parent="." instance=ExtResource("7_ivspy")]
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAttack"]
+shape = SubResource("CircleShape2D_yx5su")

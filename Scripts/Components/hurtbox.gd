@@ -5,7 +5,7 @@ extends CollisionShape2D
 ## Allows the entity to be damaged.
 @export var _health: Health
 ## Allows the entity to be affected by knockback.
-@export var _knockback: Knockback
+@export var _motion: Motion
 
 func _ready() -> void:
 	SignalBus.entity_hit.connect(_on_entity_hit)
@@ -22,10 +22,10 @@ func _on_entity_hit(ctx: HitContext) -> void:
 	
 	if _health != null:
 		_health.damage(ctx.damage)
-	if _knockback != null:
+	if _motion != null && !_motion.is_knockback_immune:
 		var knockback_direction: Vector2 = (ctx.target.position - ctx.source_position).normalized()
 		var knockback_vector: Vector2 = knockback_direction * ctx.knockback_distance
-		_knockback.apply(ctx.source_position, knockback_vector, ctx.knockback_speed)
+		_motion.apply(knockback_vector, ctx.knockback_speed)
 
 ## Health (auto-connect)
 func _on_health_started_recovering(recovery_time: float) -> void:

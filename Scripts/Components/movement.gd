@@ -15,38 +15,31 @@ signal updated(position_offset: Vector2)
 @export var movement_speed: int
 
 var can_move: bool = true
-
-## Determines the direction the entity will be moving. Has to be a normalized vector.
-var movement_direction: Vector2:
-	set(value):
-		_movement_direction = value
-
 var _movement_direction: Vector2 = Vector2.ZERO
-var _knockback_position_offset: Vector2 = Vector2.ZERO
+var _motion_position_offset: Vector2 = Vector2.ZERO
 
 func _process(delta: float) -> void:
 	var movement_offset: Vector2 = Vector2.ZERO
 
+	if _movement_direction == Vector2.ZERO && _motion_position_offset == Vector2.ZERO:
+		return
+	
 	if can_move:
 		movement_offset = _movement_direction * movement_speed * delta
 
-	updated.emit(movement_offset + _knockback_position_offset)
-	
-	# this gets reset reset because last output from
-	# the knockback signal never sends out Vector2.ZERO
-	# (remove this = last tick of knockback lasts forever)
-	_knockback_position_offset = Vector2.ZERO
+	updated.emit(movement_offset + _motion_position_offset)
 
-## Knockback (auto-connect)
-func _on_knockback_updated(position_offset: Vector2) -> void:
-	_knockback_position_offset = position_offset
+func set_direction(normalized_direction: Vector2) -> void:
+	_movement_direction = normalized_direction
 
-## Knockback (auto-connect)
-func _on_knockback_started() -> void:
-	# can_move = false
-	pass
+## Motion (auto-connect)
+func _on_motion_updated(position_offset: Vector2) -> void:
+	_motion_position_offset = position_offset
 
-## Knockback (auto-connect)
-func _on_knockback_finished() -> void:
-	# can_move = true
-	pass
+## Motion (auto-connect)
+func _on_motion_started() -> void:
+	can_move = false
+
+## Motion (auto-connect)
+func _on_motion_finished() -> void:
+	can_move = true
