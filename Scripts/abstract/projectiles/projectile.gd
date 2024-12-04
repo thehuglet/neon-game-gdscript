@@ -1,4 +1,4 @@
-class_name Projectile
+class_name ProjectileOld
 extends Area2D
 
 @export var damage: int = 1
@@ -20,7 +20,6 @@ func despawn() -> void:
 	_is_despawning = true
 	speed = 0
 	set_deferred('monitoring', false)
-	position = Vector2(-100.0, -100.0)
 
 	var despawn_timer := Timer.new()
 	despawn_timer.autostart = true

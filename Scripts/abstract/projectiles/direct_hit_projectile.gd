@@ -20,7 +20,7 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 		return
 	
 	var ctx: HitContext = HitContext.new(body)
-	ctx.damage = damage
+	ctx.damage_amount = damage
 	SignalBus.entity_hit.emit(ctx)
 	
 	_targets_hit += 1

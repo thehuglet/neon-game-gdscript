@@ -1,0 +1,145 @@
+[gd_scene load_steps=25 format=3 uid="uid://dhp250088lvt3"]
+
+[ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster/basic_attack_projectile.gd" id="1_rsmio"]
+[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/c_neon_sprite_lite.tscn" id="2_wdur3"]
+[ext_resource type="Shader" path="res://shaders/components/neon_sprite_lite.gdshader" id="3_22ako"]
+[ext_resource type="Texture2D" uid="uid://dj0qqtapkm1qr" path="res://textures/projectiles/projectile_0_blur_2.png" id="4_wgx22"]
+[ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="5_ybini"]
+[ext_resource type="Script" path="res://scripts/gpu_particles_2d_extras.gd" id="6_85cgp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtoac"]
+resource_local_to_scene = true
+shader = ExtResource("3_22ako")
+shader_parameter/u_color = Color(0.5, 0, 1, 1)
+shader_parameter/u_alpha_multiplier = 1.0
+shader_parameter/u_glow_texture = ExtResource("4_wgx22")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utg8o"]
+size = Vector2(15.5564, 15.5564)
+
+[sub_resource type="Curve" id="Curve_e06vg"]
+_data = [Vector2(0, 0.53951), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s6e4a"]
+curve = SubResource("Curve_e06vg")
+
+[sub_resource type="Gradient" id="Gradient_3pei4"]
+offsets = PackedFloat32Array(0.514925, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dbvko"]
+gradient = SubResource("Gradient_3pei4")
+
+[sub_resource type="Curve" id="Curve_4ggph"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wbajy"]
+curve = SubResource("Curve_4ggph")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bgs3r"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 38.0
+initial_velocity_min = 60.0
+initial_velocity_max = 108.19
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -59.64
+linear_accel_max = -59.64
+scale_min = 0.5
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_wbajy")
+color = Color(0.701734, 0.646804, 1, 1)
+color_ramp = SubResource("GradientTexture1D_dbvko")
+alpha_curve = SubResource("CurveTexture_s6e4a")
+
+[sub_resource type="Curve" id="Curve_uowbk"]
+_data = [Vector2(0, 0.53951), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eb375"]
+curve = SubResource("Curve_uowbk")
+
+[sub_resource type="Gradient" id="Gradient_ahhvf"]
+offsets = PackedFloat32Array(0.61194, 1)
+colors = PackedColorArray(0.47451, 0.168627, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7g802"]
+gradient = SubResource("Gradient_ahhvf")
+
+[sub_resource type="Curve" id="Curve_5lj2u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_aq56a"]
+curve = SubResource("Curve_5lj2u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qtksi"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 70.0
+initial_velocity_min = 149.82
+initial_velocity_max = 198.01
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -59.64
+linear_accel_max = -59.64
+scale_min = 0.5
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_aq56a")
+color_ramp = SubResource("GradientTexture1D_7g802")
+alpha_curve = SubResource("CurveTexture_eb375")
+hue_variation_min = -0.02
+hue_variation_max = 0.02
+
+[sub_resource type="Curve" id="Curve_7tsjf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_mm6wq"]
+colors = PackedColorArray(0.54, 0.662667, 1, 1, 0.426, 0.18, 1, 1)
+
+[node name="BasicAttackProjectile" type="Area2D" node_paths=PackedStringArray("_trail", "_particles_head", "_particles_tail", "_c_neon_sprite_lite")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rsmio")
+_speed = 1100
+_trail = NodePath("Line2D")
+_max_trail_length = 5
+_particles_head = NodePath("TrailParticlesHead")
+_particles_tail = NodePath("TrailParticlesTail")
+_c_neon_sprite_lite = NodePath("NeonSpriteLite")
+
+[node name="NeonSpriteLite" parent="." instance=ExtResource("2_wdur3")]
+material = SubResource("ShaderMaterial_xtoac")
+texture = ExtResource("5_ybini")
+_glow_texture = ExtResource("4_wgx22")
+_color = Color(0.5, 0, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_utg8o")
+
+[node name="TrailParticlesHead" type="GPUParticles2D" parent="."]
+z_index = -1
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_bgs3r")
+texture = ExtResource("5_ybini")
+lifetime = 0.3
+script = ExtResource("6_85cgp")
+
+[node name="TrailParticlesTail" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.223529)
+z_index = -2
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_qtksi")
+texture = ExtResource("5_ybini")
+lifetime = 0.6
+script = ExtResource("6_85cgp")
+_rgb_overdrive_factor = 0.2
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -3
+width_curve = SubResource("Curve_7tsjf")
+gradient = SubResource("Gradient_mm6wq")
+texture_mode = 1

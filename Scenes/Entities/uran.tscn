@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://rikdgp71mheo"]
+
+[ext_resource type="Script" path="res://scripts/entities/entity.gd" id="1_4flm7"]
+[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/c_neon_sprite.tscn" id="2_vti7q"]
+[ext_resource type="Texture2D" uid="uid://5f5lsow57f44" path="res://textures/entities/uran/uran.png" id="3_0squ4"]
+[ext_resource type="Texture2D" uid="uid://b2sxw0ena2kx5" path="res://textures/entities/uran/uran__Blur_5.png" id="4_vh55g"]
+[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/c_hurtbox.tscn" id="5_31ayd"]
+[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/c_health.tscn" id="6_ak5y6"]
+[ext_resource type="PackedScene" uid="uid://bx23ob26rh3j8" path="res://scenes/components/c_collision_attack.tscn" id="7_ukquq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5jifc"]
+radius = 16.2271
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yapl7"]
+radius = 23.1948
+
+[node name="Entity" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_4flm7")
+
+[node name="C_NeonSprite" parent="." instance=ExtResource("2_vti7q")]
+_base_texture = ExtResource("3_0squ4")
+_glow_texture = ExtResource("4_vh55g")
+_color = Color(0.4, 0.180392, 0.678431, 1)
+
+[node name="C_Hurtbox" parent="." node_paths=PackedStringArray("_c_health") instance=ExtResource("5_31ayd")]
+scale = Vector2(2.345, 2.345)
+shape = SubResource("CircleShape2D_5jifc")
+_c_health = NodePath("../C_Health")
+
+[node name="C_Health" parent="." node_paths=PackedStringArray("_c_neon_sprite", "_c_hurtbox") instance=ExtResource("6_ak5y6")]
+_health = 69
+_max_health = 69
+_c_neon_sprite = NodePath("../C_NeonSprite")
+_c_hurtbox = NodePath("../C_Hurtbox")
+
+[node name="C_CollisionAttack" parent="." instance=ExtResource("7_ukquq")]
+collision_mask = 1
+_damage_amount = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="C_CollisionAttack"]
+shape = SubResource("CircleShape2D_yapl7")

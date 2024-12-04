@@ -1,28 +1,33 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq7xrh8wbpfwc"]
+[gd_scene load_steps=12 format=3 uid="uid://bq7xrh8wbpfwc"]
 
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_bo2js"]
-[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/neon_sprite.tscn" id="1_wynst"]
-[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/hurtbox.tscn" id="2_1j7i0"]
+[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/c_neon_sprite.tscn" id="1_wynst"]
+[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/c_hurtbox.tscn" id="2_1j7i0"]
+[ext_resource type="PackedScene" uid="uid://dey64af8d1oo5" path="res://scenes/entities/player/player_weapon_handler.tscn" id="2_46gq6"]
 [ext_resource type="Texture2D" uid="uid://d0pvohn4er6l0" path="res://textures/entities/player/cube_1.png" id="2_w44gq"]
+[ext_resource type="PackedScene" uid="uid://dyx3x1k7i5is1" path="res://scenes/entities/player/weapons/neon_blaster.tscn" id="3_2yljo"]
 [ext_resource type="Texture2D" uid="uid://b3gxsnr1vswt3" path="res://textures/entities/player/cube_1_blur_5.png" id="3_4e71p"]
-[ext_resource type="PackedScene" uid="uid://bcva1sly8stv2" path="res://scenes/components/movement.tscn" id="5_amynw"]
-[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/health.tscn" id="6_juyca"]
-[ext_resource type="PackedScene" uid="uid://cc8eoj0abxtxb" path="res://scenes/components/motion.tscn" id="8_is5rq"]
-[ext_resource type="PackedScene" uid="uid://cexkoaeot0lc0" path="res://scenes/components/weapon_handler.tscn" id="9_e4dyl"]
+[ext_resource type="PackedScene" uid="uid://bcva1sly8stv2" path="res://scenes/components/c_movement.tscn" id="5_amynw"]
+[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/c_health.tscn" id="6_juyca"]
+[ext_resource type="PackedScene" uid="uid://bggpto5t0tn50" path="res://scenes/entities/player/player_dash.tscn" id="10_r35n4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rof73"]
-radius = 32.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_6536h"]
+radius = 32.5576
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neon_sprite", "movement", "weapon_handler", "motion", "hurtbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_player_weapon_handler", "_player_dash", "_c_neon_sprite", "_c_movement_controller")]
 position = Vector2(0, 1)
 collision_mask = 0
 script = ExtResource("1_bo2js")
-neon_sprite = NodePath("NeonSprite")
-movement = NodePath("Movement")
-weapon_handler = NodePath("WeaponHandler")
-motion = NodePath("Motion")
-hurtbox = NodePath("Hurtbox")
+_player_weapon_handler = NodePath("PlayerWeaponHandler")
+_player_dash = NodePath("PlayerDash")
+_c_neon_sprite = NodePath("C_NeonSprite")
+_c_movement_controller = NodePath("C_Movement")
 metadata/_access_modifiers = {
+"_c_movement_controller": 2,
+"_c_neon_sprite": 2,
+"_dash": 2,
+"_player_dash": 2,
+"_player_weapon_handler": 2,
 "auto_translate_mode": 2,
 "collision_layer": 0,
 "collision_mask": 2,
@@ -68,30 +73,84 @@ metadata/_access_modifiers = {
 "z_index": 2
 }
 
-[node name="NeonSprite" parent="." instance=ExtResource("1_wynst")]
+[node name="PlayerWeaponHandler" parent="." node_paths=PackedStringArray("_weapon_0", "_parent_entity") instance=ExtResource("2_46gq6")]
+_weapon_0 = NodePath("NeonBlaster")
+_parent_entity = NodePath("..")
+
+[node name="NeonBlaster" parent="PlayerWeaponHandler" instance=ExtResource("3_2yljo")]
+metadata/_access_modifiers = {
+"_basic_attack_fire_rate": 2,
+"_special_fire_rate": 2,
+"basic_attack_input_mode": 2,
+"basic_attack_projectile": 2,
+"special_input_mode": 2,
+"special_projectile": 2
+}
+
+[node name="PlayerDash" parent="." node_paths=PackedStringArray("_c_movement", "_c_hurtbox") instance=ExtResource("10_r35n4")]
+_dash_distance = 120
+_dash_speed = 30
+_c_movement = NodePath("../C_Movement")
+_c_hurtbox = NodePath("../C_Hurtbox")
+
+[node name="C_NeonSprite" parent="." instance=ExtResource("1_wynst")]
 _base_texture = ExtResource("2_w44gq")
 _glow_texture = ExtResource("3_4e71p")
-_color = Color(0, 1, 1, 1)
+_color = Color(0.419608, 0.827451, 0.768627, 1)
+metadata/_access_modifiers = {
+"_base_sprite": 2,
+"_blur_sprite": 2,
+"_blurred_sprite": 2,
+"_damage_flash_curve": 2,
+"_damage_flash_duration": 2,
+"_recovery_flash_curve": 2,
+"auto_translate_mode": 2,
+"base_sprite": 2,
+"base_sprite_node": 2,
+"base_sprite_ref": 2,
+"blurred_sprite": 2,
+"blurred_sprite_ref": 2,
+"clip_children": 2,
+"damage_flash_curve": 2,
+"editor_description": 2,
+"light_mask": 2,
+"material": 2,
+"modulate": 2,
+"physics_interpolation_mode": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"ref_base_sprite": 2,
+"ref_blurred_sprite": 2,
+"script": 2,
+"self_modulate": 2,
+"show_behind_parent": 2,
+"skew": 2,
+"texture_filter": 2,
+"texture_repeat": 2,
+"top_level": 2,
+"use_parent_material": 2,
+"visibility_layer": 2,
+"visible": 2,
+"y_sort_enabled": 2,
+"z_as_relative": 2,
+"z_index": 2
+}
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("_health", "_motion") instance=ExtResource("2_1j7i0")]
-shape = SubResource("CircleShape2D_rof73")
-_health = NodePath("../Health")
-_motion = NodePath("../Motion")
+[node name="C_Hurtbox" parent="." node_paths=PackedStringArray("_c_health", "_c_movement") instance=ExtResource("2_1j7i0")]
+shape = SubResource("CircleShape2D_6536h")
+_c_health = NodePath("../C_Health")
+_c_movement = NodePath("../C_Movement")
 
-[node name="Health" parent="." node_paths=PackedStringArray("_neon_sprite", "_hurtbox") instance=ExtResource("6_juyca")]
-health = 4
-max_health = 4
-recovery_time_sec = 0.75
-_neon_sprite = NodePath("../NeonSprite")
-_hurtbox = NodePath("../Hurtbox")
+[node name="C_Movement" parent="." instance=ExtResource("5_amynw")]
+_movement_speed = 350
 
-[node name="WeaponHandler" parent="." node_paths=PackedStringArray("owner_ref") instance=ExtResource("9_e4dyl")]
-owner_ref = NodePath("..")
+[node name="C_Health" parent="." node_paths=PackedStringArray("_c_neon_sprite", "_c_hurtbox") instance=ExtResource("6_juyca")]
+_recovery_time_sec = 1.25
+_health = 10
+_max_health = 10
+_c_neon_sprite = NodePath("../C_NeonSprite")
+_c_hurtbox = NodePath("../C_Hurtbox")
 
-[node name="Movement" parent="." instance=ExtResource("5_amynw")]
-movement_speed = 350
-
-[node name="Motion" parent="." node_paths=PackedStringArray("_movement") instance=ExtResource("8_is5rq")]
-_movement = NodePath("../Movement")
-
-[connection signal="updated" from="Movement" to="." method="_on_movement_updated"]
+[connection signal="updated" from="C_Movement" to="." method="_on_movement_updated"]

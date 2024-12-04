@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://2m3mxku2r1mn"]
+
+[ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster/special_explosion.gd" id="1_m0s7y"]
+[ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="2_yiofy"]
+[ext_resource type="Script" path="res://scripts/gpu_particles_2d_extras.gd" id="3_lg7cw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glqtc"]
+radius = 114.039
+
+[sub_resource type="Gradient" id="Gradient_yaogl"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cst4s"]
+gradient = SubResource("Gradient_yaogl")
+
+[sub_resource type="Curve" id="Curve_kcwi0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lekab"]
+curve = SubResource("Curve_kcwi0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_47a0h"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 250.0
+initial_velocity_max = 438.63
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_curve = SubResource("CurveTexture_lekab")
+color = Color(0, 1, 0.533333, 1)
+color_ramp = SubResource("GradientTexture1D_cst4s")
+hue_variation_min = -0.12
+hue_variation_max = 0.12
+
+[node name="SpecialExplosion" type="Area2D" node_paths=PackedStringArray("_explosion_hitbox")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_m0s7y")
+_damage = 3
+_explosion_hitbox = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_glqtc")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_47a0h")
+texture = ExtResource("2_yiofy")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("3_lg7cw")
+_one_shot_init_fix = true
+_rgb_overdrive_factor = 2.0

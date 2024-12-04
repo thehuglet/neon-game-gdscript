@@ -10,9 +10,8 @@ extends Projectile
 @export var explosion: PackedScene
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
-
 	super()
+	body_entered.connect(_on_body_entered)
 
 func spawn_explosion() -> void:
 	var instance: Explosion = explosion.instantiate()

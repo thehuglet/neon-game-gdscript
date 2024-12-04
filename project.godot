@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 SignalBus="*res://scripts/autoload/signal_bus.gd"
-ProjectileManager="*res://scripts/autoload/projectile_manager.gd"
+ProjectileHandler="*res://scripts/autoload/projectile_handler.gd"
+Utils="*res://scripts/autoload/utils.gd"
 
 [debug]
 
@@ -58,6 +59,8 @@ folder_colors={
 "res://_TEMP_OLD_CODE/Scenes/Entities/": "orange",
 "res://_TEMP_OLD_CODE/Scenes/Weapons/": "blue",
 "res://scenes/": "red",
+"res://scenes/components/": "red",
+"res://scenes/entities/": "red",
 "res://scripts/": "blue",
 "res://shaders/": "green",
 "res://textures/": "orange"
@@ -109,3 +112,4 @@ dash={
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+viewport/hdr_2d=true

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcva1sly8stv2"]
+
+[ext_resource type="Script" path="res://scripts/components/c_movement.gd" id="1_cft47"]
+
+[node name="C_Movement" type="Node"]
+script = ExtResource("1_cft47")
+metadata/_access_modifiers = {
+"auto_translate_mode": 2,
+"editor_description": 2,
+"movement_speed": 0,
+"physics_interpolation_mode": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"script": 2
+}

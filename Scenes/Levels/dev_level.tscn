@@ -1,15 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnlwu20rodld4"]
+[gd_scene load_steps=4 format=3 uid="uid://bnlwu20rodld4"]
 
 [ext_resource type="PackedScene" uid="uid://bq7xrh8wbpfwc" path="res://scenes/entities/player.tscn" id="1_yggs5"]
 [ext_resource type="PackedScene" uid="uid://bx8mgga3wx3bq" path="res://scenes/entities/roto_glow.tscn" id="2_1bll4"]
 
+[sub_resource type="Environment" id="Environment_f7iv7"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.22
+glow_strength = 0.42
+glow_mix = 0.236
+glow_bloom = 0.26
+glow_blend_mode = 1
+
 [node name="DevLevel" type="Node2D"]
-
-[node name="RotoGlow" parent="." instance=ExtResource("2_1bll4")]
-position = Vector2(1390, 325)
-
-[node name="RotoGlow2" parent="." instance=ExtResource("2_1bll4")]
-position = Vector2(1371, 394)
 
 [node name="Player" parent="." instance=ExtResource("1_yggs5")]
 position = Vector2(998, 319)
+
+[node name="RotoGlow" parent="." instance=ExtResource("2_1bll4")]
+position = Vector2(1305, 347)
+metadata/_access_modifiers = {
+"auto_translate_mode": 2,
+"collision_layer": 0,
+"collision_mask": 2,
+"collision_priority": 2,
+"disable_mode": 2,
+"editor_description": 2,
+"floor_block_on_wall": 2,
+"floor_constant_speed": 2,
+"floor_max_angle": 2,
+"floor_snap_length": 2,
+"floor_stop_on_slope": 2,
+"input_pickable": 2,
+"light_mask": 2,
+"material": 2,
+"modulate": 2,
+"motion_mode": 2,
+"neon_sprite": 2,
+"physics_interpolation_mode": 2,
+"platform_floor_layers": 2,
+"platform_on_leave": 2,
+"platform_wall_layers": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"safe_margin": 2,
+"script": 0,
+"self_modulate": 2,
+"show_behind_parent": 2,
+"skew": 2,
+"slide_on_ceiling": 2,
+"texture_filter": 2,
+"texture_repeat": 2,
+"top_level": 2,
+"up_direction": 2,
+"use_parent_material": 2,
+"visibility_layer": 2,
+"visible": 2,
+"y_sort_enabled": 2,
+"z_as_relative": 2,
+"z_index": 2
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f7iv7")

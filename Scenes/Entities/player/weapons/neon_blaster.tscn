@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyx3x1k7i5is1"]
+
+[ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster.gd" id="1_yidju"]
+[ext_resource type="PackedScene" uid="uid://dhp250088lvt3" path="res://scenes/entities/player/weapons/neon_blaster/basic_attack_projectile.tscn" id="2_kofb1"]
+[ext_resource type="PackedScene" uid="uid://oe6dkxpq588n" path="res://scenes/entities/player/weapons/neon_blaster/special_projectile.tscn" id="3_7ad05"]
+
+[node name="NeonBlaster" type="Node2D"]
+script = ExtResource("1_yidju")
+basic_attack_projectile = ExtResource("2_kofb1")
+special_projectile = ExtResource("3_7ad05")
+basic_attack_input_mode = 1
+_basic_attack_fire_rate = 8.0
+_special_fire_rate = 3.0
+metadata/_access_modifiers = {
+"_basic_attack_fire_rate": 2,
+"_special_fire_rate": 2,
+"basic_attack_input_mode": 2,
+"basic_attack_projectile": 2,
+"basic_attack_projectile_scene": 2,
+"special_input_mode": 2,
+"special_projectile": 2,
+"special_projectile_scene": 2
+}

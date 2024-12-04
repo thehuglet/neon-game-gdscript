@@ -11,7 +11,7 @@ uniform float u_saturation = 1.0;
 uniform float u_brightness = 1.0;
 uniform float u_luminance_factor = 0.0;
 
-const float BASE_ALPHA_MULTIPLIER = 2.5;
+const float BASE_ALPHA_MULTIPLIER = 1.0;
 
 void fragment() {
 	vec4 color = texture(TEXTURE, UV);

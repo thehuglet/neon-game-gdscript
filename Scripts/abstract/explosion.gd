@@ -21,7 +21,7 @@ func explode(bodies: Array[Node2D]) -> void:
 
 	for body in bodies:
 		var ctx := HitContext.new(body as CharacterBody2D)
-		ctx.damage = damage
+		ctx.damage_amount = damage
 		SignalBus.entity_hit.emit(ctx)
 
 		on_target_hit.emit()

@@ -1,0 +1,116 @@
+[gd_scene load_steps=19 format=3 uid="uid://oe6dkxpq588n"]
+
+[ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster/special_projectile.gd" id="1_lq0tt"]
+[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/c_neon_sprite_lite.tscn" id="2_d4yfw"]
+[ext_resource type="PackedScene" uid="uid://2m3mxku2r1mn" path="res://scenes/entities/player/weapons/neon_blaster/special_explosion.tscn" id="2_lf7gm"]
+[ext_resource type="Shader" path="res://shaders/components/neon_sprite_lite.gdshader" id="3_st3fw"]
+[ext_resource type="Texture2D" uid="uid://bwpyabh8londt" path="res://textures/projectiles/projectile_0_blur_5.png" id="4_7m36o"]
+[ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="5_ljmdm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwmxv"]
+resource_local_to_scene = true
+shader = ExtResource("3_st3fw")
+shader_parameter/u_color = Color(0, 1, 0.616667, 1)
+shader_parameter/u_alpha_multiplier = 0.0
+shader_parameter/u_glow_texture = ExtResource("4_7m36o")
+
+[sub_resource type="Gradient" id="Gradient_lgp2f"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wgmqn"]
+gradient = SubResource("Gradient_lgp2f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4l3i6"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 185.63
+initial_velocity_max = 185.63
+orbit_velocity_min = 0.91
+orbit_velocity_max = 0.91
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_wgmqn")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sh081"]
+
+[sub_resource type="Curve" id="Curve_e7jpt"]
+_data = [Vector2(0, 0.53951), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j17r4"]
+curve = SubResource("Curve_e7jpt")
+
+[sub_resource type="Gradient" id="Gradient_w5bei"]
+offsets = PackedFloat32Array(0.514925, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4j6pu"]
+gradient = SubResource("Gradient_w5bei")
+
+[sub_resource type="Curve" id="Curve_oy6oj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ff7u"]
+curve = SubResource("Curve_oy6oj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d0bjk"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 38.0
+initial_velocity_min = 60.0
+initial_velocity_max = 108.19
+angular_velocity_min = -543.23
+angular_velocity_max = -228.5
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -59.64
+linear_accel_max = -59.64
+scale_min = 1.7
+scale_max = 1.9
+scale_curve = SubResource("CurveTexture_0ff7u")
+color = Color(0.0823529, 0.8, 0.647059, 1)
+color_ramp = SubResource("GradientTexture1D_4j6pu")
+alpha_curve = SubResource("CurveTexture_j17r4")
+
+[node name="SpecialProjectile" type="Area2D" node_paths=PackedStringArray("_projectiles_head", "_c_neon_sprite_lite")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_lq0tt")
+_explosion = ExtResource("2_lf7gm")
+_sprite_flash_frequency = 16.0
+_sprite_flash_amplitude = 1.0
+_sprite_rotation_speed = 10
+_projectiles_head = NodePath("TrailParticlesHead")
+_c_neon_sprite_lite = NodePath("NeonSpriteLite")
+
+[node name="NeonSpriteLite" parent="." instance=ExtResource("2_d4yfw")]
+material = SubResource("ShaderMaterial_lwmxv")
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("5_ljmdm")
+_glow_texture = ExtResource("4_7m36o")
+_color = Color(0, 1, 0.616667, 1)
+alpha_multiplier = 0.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+physics_interpolation_mode = 1
+visible = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_4l3i6")
+lifetime = 0.5
+fixed_fps = 60
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+scale = Vector2(2.055, 2.055)
+shape = SubResource("CircleShape2D_sh081")
+
+[node name="TrailParticlesHead" type="GPUParticles2D" parent="."]
+visible = false
+z_index = -1
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_d0bjk")
+texture = ExtResource("5_ljmdm")
+lifetime = 0.3
+fixed_fps = 60
