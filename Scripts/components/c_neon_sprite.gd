@@ -53,10 +53,11 @@ func _set_shader_uniform(node: Sprite2D, uniform_name: String, value: Variant) -
 func _update_damage_flash(delta: float) -> void:
 	_remaining_damage_flash_time = max(_remaining_damage_flash_time - delta, 0.0)
 	var curve_time: float = 1.0 - (_remaining_damage_flash_time / _damage_flash_duration)
-	var curve_value: float = _damage_flash_curve.sample(curve_time)
+	var curve_value: float = max(_damage_flash_curve.sample(curve_time), 0.0)
 
-	_set_shader_uniform(_glow_sprite, 'u_expand_radius', curve_value * 1.5)
-	_set_shader_uniform(_glow_sprite, 'u_luminance_factor', curve_value)
+	# _set_shader_uniform(_glow_sprite, 'u_expand_radius', curve_value * 1.5)
+	# _set_shader_uniform(_glow_sprite, 'u_luminance_factor', curve_value)
+	_set_shader_uniform(_glow_sprite, 'u_damage_flash_factor', curve_value)
 
 func _update_recovery_flash(delta: float) -> void:
 	_remaining_recovery_flash_time = max(_remaining_recovery_flash_time - delta, 0.0)
