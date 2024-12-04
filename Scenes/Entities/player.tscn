@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bggpto5t0tn50" path="res://scenes/entities/player/player_dash.tscn" id="10_r35n4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6536h"]
-radius = 32.5576
+radius = 26.0192
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_player_weapon_handler", "_player_dash", "_c_neon_sprite", "_c_movement_controller")]
 position = Vector2(0, 1)

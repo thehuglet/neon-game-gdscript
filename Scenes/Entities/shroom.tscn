@@ -27,7 +27,8 @@ _glow_texture = ExtResource("4_4m1pp")
 _color = Color(0.97, 0.19303, 0.1067, 1)
 
 [node name="C_Hurtbox" parent="." node_paths=PackedStringArray("_c_health") instance=ExtResource("5_xvp06")]
-position = Vector2(0, 2.5)
+position = Vector2(0, 1.38)
+scale = Vector2(0.84, 0.84)
 shape = SubResource("RectangleShape2D_gf434")
 _c_health = NodePath("../C_Health")
 
@@ -44,4 +45,6 @@ _knockback_distance = 169
 _knockback_speed = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="C_CollisionAttack"]
+position = Vector2(0, 0.23)
+scale = Vector2(0.8, 0.8)
 shape = SubResource("CapsuleShape2D_8vrve")

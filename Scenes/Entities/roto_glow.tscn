@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://bx23ob26rh3j8" path="res://scenes/components/c_collision_attack.tscn" id="7_ivspy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q5iqy"]
-radius = 34.5254
+radius = 30.0167
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cm8m6"]
-radius = 26.4764
+radius = 19.0
 
 [node name="RotoGlow" type="CharacterBody2D" node_paths=PackedStringArray("_c_neon_sprite")]
 collision_layer = 2
