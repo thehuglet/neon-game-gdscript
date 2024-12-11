@@ -138,7 +138,7 @@ _color = Color(0.422153, 1, 0.912743, 1)
 
 [node name="NeonTrail" parent="." instance=ExtResource("5_0du6t")]
 enabled = false
-_rgb_overdrive_factor = 1.0
+_rgb_overdrive_factor = 2.0
 spawn_interval_sec = 0.01
 _decay_time = 0.1
 _base_alpha = 0.35
