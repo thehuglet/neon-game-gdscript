@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjil7qoo2st5f"]
+[gd_scene load_steps=12 format=3 uid="uid://bjil7qoo2st5f"]
 
 [ext_resource type="Script" path="res://scripts/entities/shroom.gd" id="1_moyd4"]
-[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/c_neon_sprite.tscn" id="2_dpluc"]
+[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/neon_sprite.tscn" id="2_dpluc"]
+[ext_resource type="PackedScene" uid="uid://bcva1sly8stv2" path="res://scenes/components/movement.tscn" id="2_i4t0c"]
 [ext_resource type="Texture2D" uid="uid://ddw85rdjwh2r5" path="res://textures/entities/shroom/shroom.png" id="3_jtyha"]
+[ext_resource type="PackedScene" uid="uid://cvd30nhjyoc31" path="res://scenes/components/movement_strategies/idle_float_movement_strategy.tscn" id="3_lp6rl"]
 [ext_resource type="Texture2D" uid="uid://cj37gxk8nc5ik" path="res://textures/entities/shroom/shroom__Blur_5.png" id="4_4m1pp"]
-[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/c_hurtbox.tscn" id="5_xvp06"]
-[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/c_health.tscn" id="6_logaa"]
-[ext_resource type="PackedScene" uid="uid://bx23ob26rh3j8" path="res://scenes/components/c_collision_attack.tscn" id="7_ipg8r"]
+[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/hurtbox.tscn" id="5_xvp06"]
+[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/health.tscn" id="6_logaa"]
+[ext_resource type="PackedScene" uid="uid://bx23ob26rh3j8" path="res://scenes/components/collision_attack.tscn" id="7_ipg8r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gf434"]
 size = Vector2(30, 47)
@@ -15,36 +17,45 @@ size = Vector2(30, 47)
 radius = 18.0
 height = 54.0
 
-[node name="Shroom" type="CharacterBody2D" node_paths=PackedStringArray("_c_neon_sprite")]
+[node name="Shroom" type="CharacterBody2D" node_paths=PackedStringArray("_neon_sprite", "_movement", "_movement_strategy")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_moyd4")
-_c_neon_sprite = NodePath("C_NeonSprite")
+_neon_sprite = NodePath("NeonSprite")
+_movement = NodePath("Movement")
+_movement_strategy = NodePath("Movement/IdleFloatMovementStrategy")
 
-[node name="C_NeonSprite" parent="." instance=ExtResource("2_dpluc")]
+[node name="Movement" parent="." instance=ExtResource("2_i4t0c")]
+
+[node name="IdleFloatMovementStrategy" parent="Movement" instance=ExtResource("3_lp6rl")]
+_movement_speed = 40
+_max_target_distance = 10.0
+_change_target_position_interval_sec = 99.0
+
+[node name="NeonSprite" parent="." instance=ExtResource("2_dpluc")]
 _base_texture = ExtResource("3_jtyha")
 _glow_texture = ExtResource("4_4m1pp")
 _color = Color(0.97, 0.19303, 0.1067, 1)
 
-[node name="C_Hurtbox" parent="." node_paths=PackedStringArray("_c_health") instance=ExtResource("5_xvp06")]
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("_health", "_movement") instance=ExtResource("5_xvp06")]
 position = Vector2(0, 1.38)
 scale = Vector2(0.84, 0.84)
 shape = SubResource("RectangleShape2D_gf434")
-_c_health = NodePath("../C_Health")
+_health = NodePath("../Health")
+_movement = NodePath("../Movement")
 
-[node name="C_Health" parent="." node_paths=PackedStringArray("_c_neon_sprite", "_c_hurtbox") instance=ExtResource("6_logaa")]
+[node name="Health" parent="." node_paths=PackedStringArray("_neon_sprite", "_hurtbox") instance=ExtResource("6_logaa")]
 _health = 10
 _max_health = 10
-_c_neon_sprite = NodePath("../C_NeonSprite")
-_c_hurtbox = NodePath("../C_Hurtbox")
+_neon_sprite = NodePath("../NeonSprite")
+_hurtbox = NodePath("../Hurtbox")
 
-[node name="C_CollisionAttack" parent="." instance=ExtResource("7_ipg8r")]
+[node name="CollisionAttack" parent="." instance=ExtResource("7_ipg8r")]
 collision_mask = 1
 _damage_amount = 1
 _knockback_distance = 169
-_knockback_speed = 15.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="C_CollisionAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAttack"]
 position = Vector2(0, 0.23)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("CapsuleShape2D_8vrve")

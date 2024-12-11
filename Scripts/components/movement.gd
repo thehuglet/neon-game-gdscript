@@ -14,17 +14,15 @@ signal updated(position_offset: Vector2)
 signal push_motion_started
 signal push_motion_ended
 
-@export var _movement_speed: int
 @export var _is_knockback_immune: bool = false
 
 var is_knockback_immune: bool:
 	get: return _is_knockback_immune
-var movement_speed: int:
-	get: return _movement_speed
 var push_motion_duration: float:
 	get: return _push_motion_duration
 var _is_immobilized: bool = false
 var _movement_direction := Vector2.ZERO
+var _movement_strategy: MovementStrategy
 var _push_motion_end_pos: Vector2
 var _push_motion_duration: float
 var _push_motion_elapsed_time: float
@@ -34,16 +32,16 @@ var _push_motion_last_offset: Vector2
 func _process(delta: float) -> void:
 	var movement_offset: Vector2 = _update_push_motion(delta)
 
-	if _movement_direction == Vector2.ZERO && movement_offset == Vector2.ZERO:
-		return
-
 	if !_is_immobilized:
-		movement_offset += _movement_direction * _movement_speed * delta
+		movement_offset += _movement_strategy.calculate_movement_offset(delta)
+
+	if movement_offset == Vector2.ZERO:
+		return
 
 	updated.emit(movement_offset)
 
-func set_direction(normalized_direction: Vector2) -> void:
-	_movement_direction = normalized_direction
+func set_movement_strategy(movement_strategy: MovementStrategy) -> void:
+	_movement_strategy = movement_strategy
 
 func apply_push_motion(motion: Vector2, speed: float) -> void:
 	const BASE_MOTION_MULTIPLIER = 1.5
@@ -73,6 +71,7 @@ func _update_push_motion(delta: float) -> Vector2:
 	t = _ease_out_quad(t)
 	var current_offset := Vector2.ZERO.lerp(_push_motion_end_pos, t)
 	var offset: Vector2 = current_offset - _push_motion_last_offset
+
 	_push_motion_last_offset = current_offset
 	return offset
 

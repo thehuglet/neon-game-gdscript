@@ -1,10 +1,17 @@
 class_name Weapon
 extends Node2D
 
+@export_group('Input Mode')
 @export_enum('SEMI', 'AUTO') var basic_attack_input_mode: int
-@export var _basic_attack_fire_rate: float = 1.0 
 @export_enum('SEMI', 'AUTO') var special_input_mode: int
+
+@export_group('Fire Rate')
+@export var _basic_attack_fire_rate: float = 1.0 
 @export var _special_fire_rate: float = 0.5
+
+@export_group('Lumen')
+@export var _basic_attack_lumen_gain: int = 4
+@export var _special_lumen_cost: int = 33
 
 @onready var _basic_attack_use_interval: float = 1.0 / _basic_attack_fire_rate
 @onready var _special_use_interval: float = 1.0 / _special_fire_rate
@@ -32,8 +39,9 @@ func use_basic_attack() -> void:
 		_on_use_basic_attack()
 
 func use_special() -> void:
-	if !_is_special_on_cooldown():
+	if !_is_special_on_cooldown() and Lumen.get_amount() >= _special_lumen_cost:
 		_special_use_cooldown = _special_use_interval
+		Lumen.drain(_special_lumen_cost)
 		_on_use_special()
 
 func set_parent_entity(parent_entity: CharacterBody2D) -> void:

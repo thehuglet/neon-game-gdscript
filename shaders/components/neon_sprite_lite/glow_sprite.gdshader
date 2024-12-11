@@ -8,5 +8,8 @@ const float BASE_ALPHA_MULTIPLIER = 5.0;
 
 void fragment() {
 	vec4 col = texture(TEXTURE, UV);
-	COLOR = vec4(u_color.rgb, col.a * BASE_ALPHA_MULTIPLIER * u_alpha_multiplier);
+
+	col = vec4(u_color.rgb, col.a * BASE_ALPHA_MULTIPLIER);
+	col.a = clamp(col.a, 0.0, 1.0) * u_alpha_multiplier;
+	COLOR = col;
 }

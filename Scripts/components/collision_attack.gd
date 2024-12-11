@@ -6,7 +6,7 @@ extends Area2D
 @export var _knockback_speed: float = 25
 
 func _ready() -> void:
-	connect('body_entered', _on_body_entered)
+	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: CharacterBody2D) -> void:
 	var ctx := HitContext.new(body)

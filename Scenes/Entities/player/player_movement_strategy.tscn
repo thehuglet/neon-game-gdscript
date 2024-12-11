@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqnflnsed384h"]
+
+[ext_resource type="Script" path="res://scripts/entities/player/player_movement_strategy.gd" id="1_h281a"]
+
+[node name="PlayerMovementStrategy" type="Node"]
+script = ExtResource("1_h281a")
+metadata/_access_modifiers = {
+"auto_translate_mode": 2,
+"editor_description": 2,
+"physics_interpolation_mode": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"script": 2
+}

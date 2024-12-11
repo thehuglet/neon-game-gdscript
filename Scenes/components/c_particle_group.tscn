@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vp2wqta8e24a"]
-
-[ext_resource type="Script" path="res://scripts/components/c_particle_group.gd" id="1_0vcip"]
-
-[node name="C_ParticleGroup" type="Node2D"]
-script = ExtResource("1_0vcip")

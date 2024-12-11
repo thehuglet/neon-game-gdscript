@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://caygg648436r0"]
 
-[ext_resource type="Script" path="res://scripts/components/c_neon_sprite.gd" id="1_vagxd"]
+[ext_resource type="Script" path="res://scripts/components/neon_sprite.gd" id="1_vagxd"]
 [ext_resource type="Shader" path="res://shaders/components/neon_sprite/glow_sprite.gdshader" id="2_rvd64"]
 [ext_resource type="Shader" path="res://shaders/components/neon_sprite/base_sprite.gdshader" id="3_p112a"]
 
@@ -29,7 +29,7 @@ resource_local_to_scene = true
 shader = ExtResource("3_p112a")
 shader_parameter/u_alpha = 1.0
 
-[node name="C_NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_glow_sprite")]
+[node name="NeonSprite" type="Node2D" node_paths=PackedStringArray("_base_sprite", "_glow_sprite")]
 script = ExtResource("1_vagxd")
 _color = Color(1, 1, 1, 1)
 _damage_flash_curve = SubResource("Curve_jarft")

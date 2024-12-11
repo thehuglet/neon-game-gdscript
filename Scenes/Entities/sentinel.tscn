@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgbdaxlvbl730"]
+
+[ext_resource type="Script" path="res://scripts/entities/sentinel.gd" id="1_c6npb"]
+[ext_resource type="PackedScene" uid="uid://caygg648436r0" path="res://scenes/components/neon_sprite.tscn" id="2_jvshv"]
+[ext_resource type="Texture2D" uid="uid://cei8b1ptvpp3x" path="res://textures/entities/sentinel/Sentinel_7.png" id="3_k8pbw"]
+[ext_resource type="Texture2D" uid="uid://cpjadv6ixjf71" path="res://textures/entities/sentinel/Sentinel_7__Blur_5.0.png" id="4_jp32w"]
+[ext_resource type="PackedScene" uid="uid://ph83y4evfw7x" path="res://scenes/components/hurtbox.tscn" id="5_qomiu"]
+[ext_resource type="PackedScene" uid="uid://cq7rridrbgkmr" path="res://scenes/components/health.tscn" id="6_rkhgg"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_3fi1o"]
+
+[node name="Sentinel" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_c6npb")
+
+[node name="C_NeonSprite" parent="." instance=ExtResource("2_jvshv")]
+_base_texture = ExtResource("3_k8pbw")
+_glow_texture = ExtResource("4_jp32w")
+_color = Color(0.1, 1, 0, 1)
+
+[node name="C_Hurtbox" parent="." node_paths=PackedStringArray("_c_health") instance=ExtResource("5_qomiu")]
+shape = SubResource("ConvexPolygonShape2D_3fi1o")
+_c_health = NodePath("../C_Health")
+
+[node name="C_Health" parent="." node_paths=PackedStringArray("_c_neon_sprite", "_c_hurtbox") instance=ExtResource("6_rkhgg")]
+_health = 99
+_max_health = 99
+_c_neon_sprite = NodePath("../C_NeonSprite")
+_c_hurtbox = NodePath("../C_Hurtbox")

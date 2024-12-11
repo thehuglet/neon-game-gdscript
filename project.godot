@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SignalBus="*res://scripts/autoload/signal_bus.gd"
 ProjectileHandler="*res://scripts/autoload/projectile_handler.gd"
+Lumen="*res://scripts/autoload/lumen.gd"
 Utils="*res://scripts/autoload/utils.gd"
 
 [debug]

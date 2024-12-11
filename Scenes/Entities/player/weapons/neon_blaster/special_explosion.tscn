@@ -57,4 +57,4 @@ one_shot = true
 explosiveness = 1.0
 script = ExtResource("3_lg7cw")
 _one_shot_init_fix = true
-_rgb_overdrive_factor = 2.0
+_rgb_overdrive_factor = 2.5

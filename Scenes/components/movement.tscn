@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcva1sly8stv2"]
 
-[ext_resource type="Script" path="res://scripts/components/c_movement.gd" id="1_cft47"]
+[ext_resource type="Script" path="res://scripts/components/movement.gd" id="1_cft47"]
 
-[node name="C_Movement" type="Node"]
+[node name="Movement" type="Node"]
 script = ExtResource("1_cft47")
 metadata/_access_modifiers = {
 "auto_translate_mode": 2,

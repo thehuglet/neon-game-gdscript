@@ -6,7 +6,7 @@ extends Projectile
 @export var _max_trail_length: int
 @export var _particles_head: GPUParticles2D
 @export var _particles_tail: GPUParticles2D
-@export var _c_neon_sprite_lite: NeonSpriteLite
+@export var _neon_sprite_lite: NeonSpriteLite
 
 func _ready() -> void:
 	super()
@@ -36,12 +36,17 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 	if _is_discarded:
 		return
 
+	# SignalBus.player_lumen_generating_action.emit(9)
+	# TODO: make this dynamic and link to an export in the weapon itself
+	# Lumen.lumen += 9
+	Lumen.generate(9)
+
 	var ctx := HitContext.new(body)
 	ctx.damage_amount = _damage
 	SignalBus.entity_hit.emit(ctx)
 
 	_particles_head.emitting = false
 	_particles_tail.emitting = false
-	_c_neon_sprite_lite.visible = false
+	_neon_sprite_lite.visible = false
 	discard()
 	

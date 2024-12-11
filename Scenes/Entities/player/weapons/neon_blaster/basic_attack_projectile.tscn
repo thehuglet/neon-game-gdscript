@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://dhp250088lvt3"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster/basic_attack_projectile.gd" id="1_rsmio"]
-[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/c_neon_sprite_lite.tscn" id="2_wdur3"]
+[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/neon_sprite_lite.tscn" id="2_wdur3"]
 [ext_resource type="Shader" path="res://shaders/components/neon_sprite_lite.gdshader" id="3_22ako"]
 [ext_resource type="Texture2D" uid="uid://dj0qqtapkm1qr" path="res://textures/projectiles/projectile_0_blur_2.png" id="4_wgx22"]
 [ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="5_ybini"]
@@ -10,8 +10,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xtoac"]
 resource_local_to_scene = true
 shader = ExtResource("3_22ako")
+shader_parameter/u_base_color = Color(1, 1, 1, 1)
 shader_parameter/u_color = Color(0.5, 0, 1, 1)
 shader_parameter/u_alpha_multiplier = 1.0
+shader_parameter/u_do_glow_alpha_multiplier = true
 shader_parameter/u_glow_texture = ExtResource("4_wgx22")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utg8o"]
@@ -99,7 +101,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_mm6wq"]
 colors = PackedColorArray(0.54, 0.662667, 1, 1, 0.426, 0.18, 1, 1)
 
-[node name="BasicAttackProjectile" type="Area2D" node_paths=PackedStringArray("_trail", "_particles_head", "_particles_tail", "_c_neon_sprite_lite")]
+[node name="BasicAttackProjectile" type="Area2D" node_paths=PackedStringArray("_trail", "_particles_head", "_particles_tail", "_neon_sprite_lite")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_rsmio")
@@ -108,13 +110,11 @@ _trail = NodePath("Line2D")
 _max_trail_length = 5
 _particles_head = NodePath("TrailParticlesHead")
 _particles_tail = NodePath("TrailParticlesTail")
-_c_neon_sprite_lite = NodePath("NeonSpriteLite")
+_neon_sprite_lite = NodePath("NeonSpriteLite")
 
 [node name="NeonSpriteLite" parent="." instance=ExtResource("2_wdur3")]
 material = SubResource("ShaderMaterial_xtoac")
 texture = ExtResource("5_ybini")
-_glow_texture = ExtResource("4_wgx22")
-_color = Color(0.5, 0, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 0.785398
@@ -127,6 +127,7 @@ process_material = SubResource("ParticleProcessMaterial_bgs3r")
 texture = ExtResource("5_ybini")
 lifetime = 0.3
 script = ExtResource("6_85cgp")
+_rgb_overdrive_factor = 0.3
 
 [node name="TrailParticlesTail" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.223529)

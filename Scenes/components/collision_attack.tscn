@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx23ob26rh3j8"]
+
+[ext_resource type="Script" path="res://scripts/components/collision_attack.gd" id="1_vetwl"]
+
+[node name="CollisionAttack" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+script = ExtResource("1_vetwl")
+metadata/_access_modifiers = {
+"angular_damp_space_override": 2,
+"audio_bus_name": 2,
+"audio_bus_override": 2,
+"auto_translate_mode": 2,
+"collision_layer": 2,
+"collision_mask": 1,
+"collision_priority": 2,
+"disable_mode": 2,
+"editor_description": 2,
+"gravity_space_override": 2,
+"input_pickable": 2,
+"light_mask": 2,
+"linear_damp_space_override": 2,
+"material": 2,
+"modulate": 2,
+"monitorable": 2,
+"monitoring": 2,
+"physics_interpolation_mode": 2,
+"position": 2,
+"priority": 2,
+"process_mode": 2,
+"process_physics_priority": 2,
+"process_priority": 2,
+"process_thread_group": 2,
+"rotation": 2,
+"scale": 2,
+"script": 2,
+"self_modulate": 2,
+"show_behind_parent": 2,
+"skew": 2,
+"texture_filter": 2,
+"texture_repeat": 2,
+"top_level": 2,
+"use_parent_material": 2,
+"visibility_layer": 2,
+"visible": 2,
+"y_sort_enabled": 2,
+"z_as_relative": 2,
+"z_index": 2
+}

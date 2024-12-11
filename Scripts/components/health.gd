@@ -10,8 +10,11 @@ signal finished_recovering
 @export var _recovery_time_sec: float
 @export var _health: int
 @export var _max_health: int
-@export var _c_neon_sprite: NeonSprite		## Enables automatic VFX on the entity sprite on damage (optional)
-@export var _c_hurtbox: Hurtbox				## Enables automatic hurtbox disabling during recovery (optional)
+
+@export_group('Component References')
+@export var _neon_sprite: NeonSprite		## Enables automatic VFX on the entity sprite on damage (optional)
+@export var _hurtbox: Hurtbox				## Enables automatic hurtbox disabling during recovery (optional)
+@export_group('')
 
 var health: int:
 	get: return _health
@@ -26,12 +29,12 @@ var _remaining_recovery_time: float = 0.0
 var _is_dead: bool = false
 
 func _ready() -> void:
-	if _c_hurtbox != null:
-		started_recovering.connect(_c_hurtbox._on_health_started_recovering)
-		finished_recovering.connect(_c_hurtbox._on_health_finished_recovering)
-	if _c_neon_sprite != null:
-		took_damage.connect(_c_neon_sprite._on_health_took_damage)
-		started_recovering.connect(_c_neon_sprite._on_health_started_recovering)
+	if _hurtbox != null:
+		started_recovering.connect(_hurtbox._on_health_started_recovering)
+		finished_recovering.connect(_hurtbox._on_health_finished_recovering)
+	if _neon_sprite != null:
+		took_damage.connect(_neon_sprite._on_health_took_damage)
+		started_recovering.connect(_neon_sprite._on_health_started_recovering)
 
 func _physics_process(delta: float) -> void:
 	if !_is_recovering:

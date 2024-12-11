@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://oe6dkxpq588n"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster/special_projectile.gd" id="1_lq0tt"]
-[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/c_neon_sprite_lite.tscn" id="2_d4yfw"]
+[ext_resource type="PackedScene" uid="uid://butfrbwfgjdjb" path="res://scenes/components/neon_sprite_lite.tscn" id="2_d4yfw"]
 [ext_resource type="PackedScene" uid="uid://2m3mxku2r1mn" path="res://scenes/entities/player/weapons/neon_blaster/special_explosion.tscn" id="2_lf7gm"]
 [ext_resource type="Shader" path="res://shaders/components/neon_sprite_lite.gdshader" id="3_st3fw"]
 [ext_resource type="Texture2D" uid="uid://bwpyabh8londt" path="res://textures/projectiles/projectile_0_blur_5.png" id="4_7m36o"]
@@ -10,8 +10,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwmxv"]
 resource_local_to_scene = true
 shader = ExtResource("3_st3fw")
+shader_parameter/u_base_color = Color(1, 1, 1, 1)
 shader_parameter/u_color = Color(0, 1, 0.616667, 1)
 shader_parameter/u_alpha_multiplier = 0.0
+shader_parameter/u_do_glow_alpha_multiplier = true
 shader_parameter/u_glow_texture = ExtResource("4_7m36o")
 
 [sub_resource type="Gradient" id="Gradient_lgp2f"]
@@ -74,7 +76,7 @@ color = Color(0.0823529, 0.8, 0.647059, 1)
 color_ramp = SubResource("GradientTexture1D_4j6pu")
 alpha_curve = SubResource("CurveTexture_j17r4")
 
-[node name="SpecialProjectile" type="Area2D" node_paths=PackedStringArray("_projectiles_head", "_c_neon_sprite_lite")]
+[node name="SpecialProjectile" type="Area2D" node_paths=PackedStringArray("_projectiles_head", "_neon_sprite_lite")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_lq0tt")
@@ -83,14 +85,12 @@ _sprite_flash_frequency = 16.0
 _sprite_flash_amplitude = 1.0
 _sprite_rotation_speed = 10
 _projectiles_head = NodePath("TrailParticlesHead")
-_c_neon_sprite_lite = NodePath("NeonSpriteLite")
+_neon_sprite_lite = NodePath("NeonSpriteLite")
 
 [node name="NeonSpriteLite" parent="." instance=ExtResource("2_d4yfw")]
 material = SubResource("ShaderMaterial_lwmxv")
 scale = Vector2(1.75, 1.75)
 texture = ExtResource("5_ljmdm")
-_glow_texture = ExtResource("4_7m36o")
-_color = Color(0, 1, 0.616667, 1)
 alpha_multiplier = 0.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
