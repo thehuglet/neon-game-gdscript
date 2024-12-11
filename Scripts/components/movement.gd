@@ -21,7 +21,6 @@ var is_knockback_immune: bool:
 var push_motion_duration: float:
 	get: return _push_motion_duration
 var _is_immobilized: bool = false
-var _movement_direction := Vector2.ZERO
 var _movement_strategy: MovementStrategy
 var _push_motion_end_pos: Vector2
 var _push_motion_duration: float

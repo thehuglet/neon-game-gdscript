@@ -96,10 +96,10 @@ _base_movement_speed = 320
 _acceleration_rate = 3.0
 _deceleration_rate = 3.5
 _max_speed_multiplier = 7.0
-_acceleration_cone_angle_deg = 60.0
+_speed_variation = 0.2
 _base_turn_rate = 2.6
 _turn_speed_variation = 0.2
-_speed_variation = 0.2
+_acceleration_cone_angle_deg = 60.0
 
 [node name="NeonSprite" parent="." instance=ExtResource("2_tdwr8")]
 _base_texture = ExtResource("3_nkngy")

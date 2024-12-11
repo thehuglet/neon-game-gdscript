@@ -4,7 +4,3 @@
 
 [node name="IdleFloatMovementStrategy" type="Node"]
 script = ExtResource("1_n7xbi")
-_change_target_position_interval_sec = 1.0
-_max_float_range = 50.0
-_movement_speed = 100
-_turn_rate = 3.0

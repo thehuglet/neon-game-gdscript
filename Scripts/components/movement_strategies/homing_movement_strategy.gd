@@ -1,17 +1,21 @@
 class_name HomingMovementStrategy
 extends MovementStrategy
 
+
+@export_group('Forward Movement')
 @export var _base_movement_speed: int
 @export var _acceleration_rate: float
 @export var _deceleration_rate: float
 @export_range(1.0, 25.0, 0.1) var _max_speed_multiplier: float
-@export var _acceleration_cone_angle_deg: float
-@export var _base_turn_rate: float
-@export var _turn_speed_variation: float
 @export var _speed_variation: float
 
+@export_group('Steering')
+@export var _base_turn_rate: float
+@export var _turn_speed_variation: float
+@export var _acceleration_cone_angle_deg: float
+
 var _speed_multiplier: float = 1.0
-var _facing_direction: Vector2
+var _facing_direction := Vector2.UP
 var _target_direction: Vector2
 @onready var _current_turn_speed_variation: float = 1.0 + randf_range(_turn_speed_variation, -_turn_speed_variation)
 @onready var _current_speed_variation: float = 1.0 + randf_range(_speed_variation, -_speed_variation)
