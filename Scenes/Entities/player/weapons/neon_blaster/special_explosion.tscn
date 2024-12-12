@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://2m3mxku2r1mn"]
+[gd_scene load_steps=15 format=3 uid="uid://2m3mxku2r1mn"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/weapons/neon_blaster/special_explosion.gd" id="1_m0s7y"]
 [ext_resource type="Texture2D" uid="uid://bgr4mfxog7yyp" path="res://textures/projectiles/projectile_0.png" id="2_yiofy"]
@@ -37,6 +37,38 @@ color_ramp = SubResource("GradientTexture1D_cst4s")
 hue_variation_min = -0.12
 hue_variation_max = 0.12
 
+[sub_resource type="Gradient" id="Gradient_0flhj"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lxujv"]
+gradient = SubResource("Gradient_0flhj")
+
+[sub_resource type="Curve" id="Curve_66ufa"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j1o7c"]
+curve = SubResource("Curve_66ufa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o5rir"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+radial_velocity_min = -47.61
+radial_velocity_max = 290.04
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_min = 4.08
+scale_max = 4.08
+scale_curve = SubResource("CurveTexture_j1o7c")
+color = Color(0, 0.977628, 0.798591, 1)
+color_ramp = SubResource("GradientTexture1D_lxujv")
+hue_variation_min = -0.12
+hue_variation_max = 0.12
+
 [node name="SpecialExplosion" type="Area2D" node_paths=PackedStringArray("_explosion_hitbox")]
 collision_layer = 0
 collision_mask = 2
@@ -49,7 +81,7 @@ shape = SubResource("CircleShape2D_glqtc")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 30
+amount = 150
 process_material = SubResource("ParticleProcessMaterial_47a0h")
 texture = ExtResource("2_yiofy")
 lifetime = 0.5
@@ -58,3 +90,14 @@ explosiveness = 1.0
 script = ExtResource("3_lg7cw")
 _one_shot_init_fix = true
 _rgb_overdrive_factor = 2.5
+
+[node name="VFXRingIndicator" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_o5rir")
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+script = ExtResource("3_lg7cw")
+_one_shot_init_fix = true
