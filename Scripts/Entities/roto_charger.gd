@@ -1,4 +1,4 @@
-class_name RotoGlow
+class_name RotoCharger
 extends Entity
 
 @export var _turn_speed: float
@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	
 	var speed_multiplier: float = _movement_strategy.get_speed_multiplier()
 
-	_neon_sprite.rotation += _base_sprite_rotation_speed * speed_multiplier * 0.33 * delta
+	_neon_sprite.rotation += pow(_base_sprite_rotation_speed * speed_multiplier * 1.3 * delta, 2)
 	_neon_trail.update_rotation(_neon_sprite.rotation)
 	_neon_trail.spawn_interval_sec = _base_trail_spawn_interval_sec / speed_multiplier * 7.0
 

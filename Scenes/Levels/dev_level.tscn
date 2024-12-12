@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_1dxnx"]
 [ext_resource type="PackedScene" uid="uid://bq7xrh8wbpfwc" path="res://scenes/entities/player.tscn" id="1_yggs5"]
-[ext_resource type="PackedScene" uid="uid://bx8mgga3wx3bq" path="res://scenes/entities/roto_glow.tscn" id="2_qxrrg"]
+[ext_resource type="PackedScene" uid="uid://bx8mgga3wx3bq" path="res://scenes/entities/roto_charger.tscn" id="2_qxrrg"]
 [ext_resource type="PackedScene" uid="uid://bjil7qoo2st5f" path="res://scenes/entities/shroom.tscn" id="4_3p8ml"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wosao"]
@@ -34,7 +34,7 @@ glow_blend_mode = 1
 [node name="DevLevel" type="Node2D"]
 script = ExtResource("1_1dxnx")
 
-[node name="RotoGlow" parent="." instance=ExtResource("2_qxrrg")]
+[node name="RotoCharger" parent="." instance=ExtResource("2_qxrrg")]
 position = Vector2(537, 212)
 metadata/_access_modifiers = {
 "_c_neon_sprite": 2,

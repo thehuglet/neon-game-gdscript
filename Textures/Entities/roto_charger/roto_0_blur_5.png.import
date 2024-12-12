@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://drfwie67et37p"
-path="res://.godot/imported/roto_0_blur_5.png-f17e517fb47388e49c3306700e8e2552.ctex"
+path="res://.godot/imported/roto_0_blur_5.png-3226632763caf2dd54430bb85d328fe1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/entities/roto_glow/roto_0_blur_5.png"
-dest_files=["res://.godot/imported/roto_0_blur_5.png-f17e517fb47388e49c3306700e8e2552.ctex"]
+source_file="res://textures/entities/roto_charger/roto_0_blur_5.png"
+dest_files=["res://.godot/imported/roto_0_blur_5.png-3226632763caf2dd54430bb85d328fe1.ctex"]
 
 [params]
 
